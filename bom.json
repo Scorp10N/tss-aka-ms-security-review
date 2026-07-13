@@ -4,6 +4,7 @@
   "resolved_url": "https://download.microsoft.com/download/53c578ea-5649-4fdb-b949-0529ebb643ab/TSS.zip",
   "archive_sha256": "c9c35d27fe10eca06da2227111392fb8f7489098984248889cae77e1496487bd",
   "file_count": 1531,
+  "verification_method": "osslsigncode verify (PE digest recomputed and compared to embedded signed digest = digest_match; full chain-to-root verification = chain_verified, requires local Microsoft root CA trust store which was not configured, so chain_verified is expected to read false/failed even for genuine binaries)",
   "files": [
     {
       "path": "BIN/AgentConfigManagerLib.dll",
@@ -12,9 +13,10 @@
       "extension": ".dll",
       "is_pe": true,
       "signed": true,
-      "signer": "C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft Corporation",
-      "product_version": " ",
-      "company_name": " "
+      "digest_match": true,
+      "chain_verified": false,
+      "signer": "CN=Microsoft Corporation,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US",
+      "issuer": "CN=Microsoft Code Signing PCA 2011,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US"
     },
     {
       "path": "BIN/ConnectivityDiagnosis.exe",
@@ -23,9 +25,10 @@
       "extension": ".exe",
       "is_pe": true,
       "signed": true,
-      "signer": "C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft Corporation",
-      "product_version": "10.0.18286.1000",
-      "company_name": "Microsoft Corporation"
+      "digest_match": true,
+      "chain_verified": false,
+      "signer": "CN=Microsoft Corporation,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US",
+      "issuer": "CN=Microsoft Code Signing PCA 2011,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US"
     },
     {
       "path": "BIN/Coreinfo.exe",
@@ -34,9 +37,10 @@
       "extension": ".exe",
       "is_pe": true,
       "signed": true,
-      "signer": "C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft Corporation",
-      "product_version": "4.0",
-      "company_name": "Sysinternals - www.sysinternals.com"
+      "digest_match": true,
+      "chain_verified": false,
+      "signer": "CN=Microsoft Corporation,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US",
+      "issuer": "CN=Microsoft Code Signing PCA 2011,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US"
     },
     {
       "path": "BIN/DatabaseAnalyzer.exe",
@@ -45,9 +49,10 @@
       "extension": ".exe",
       "is_pe": true,
       "signed": true,
-      "signer": "C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft Corporation",
-      "product_version": "0.0.0.0",
-      "company_name": null
+      "digest_match": true,
+      "chain_verified": false,
+      "signer": "CN=Microsoft Corporation,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US",
+      "issuer": "CN=Microsoft Code Signing PCA 2011,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US"
     },
     {
       "path": "BIN/DisplayExtendedAttribute.exe",
@@ -56,9 +61,10 @@
       "extension": ".exe",
       "is_pe": true,
       "signed": true,
-      "signer": "C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft Corporation",
-      "product_version": null,
-      "company_name": null
+      "digest_match": true,
+      "chain_verified": false,
+      "signer": "CN=Microsoft Corporation,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US",
+      "issuer": "CN=Microsoft Code Signing PCA 2011,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US"
     },
     {
       "path": "BIN/MDEClientAnalyzer.exe",
@@ -67,9 +73,10 @@
       "extension": ".exe",
       "is_pe": true,
       "signed": true,
-      "signer": "C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft Corporation",
-      "product_version": "10.8040.22427.1002",
-      "company_name": "Microsoft Corporation"
+      "digest_match": true,
+      "chain_verified": false,
+      "signer": "CN=Microsoft Corporation,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US",
+      "issuer": "CN=Microsoft Code Signing PCA 2011,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US"
     },
     {
       "path": "BIN/MDEClientAnalyzerPreviousVersion.exe",
@@ -78,9 +85,10 @@
       "extension": ".exe",
       "is_pe": true,
       "signed": true,
-      "signer": "C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft Corporation",
-      "product_version": "1.0.0.0",
-      "company_name": null
+      "digest_match": true,
+      "chain_verified": false,
+      "signer": "CN=Microsoft Corporation,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US",
+      "issuer": "CN=Microsoft Code Signing PCA 2011,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US"
     },
     {
       "path": "BIN/Procmon.exe",
@@ -89,9 +97,10 @@
       "extension": ".exe",
       "is_pe": true,
       "signed": true,
-      "signer": "C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft Corporation",
-      "product_version": "4.01",
-      "company_name": "Sysinternals - www.sysinternals.com"
+      "digest_match": true,
+      "chain_verified": false,
+      "signer": "CN=Microsoft Corporation,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US",
+      "issuer": "CN=Microsoft Code Signing PCA 2011,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US"
     },
     {
       "path": "BIN/SQLCheck.exe",
@@ -100,9 +109,10 @@
       "extension": ".exe",
       "is_pe": true,
       "signed": true,
-      "signer": "C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft Corporation (Internal Use Only)",
-      "product_version": "1.0.1487.0",
-      "company_name": "Microsoft Corporation - SQL Server Customer Support"
+      "digest_match": true,
+      "chain_verified": false,
+      "signer": "CN=Microsoft Corporation (Internal Use Only),O=Microsoft Corporation,L=Redmond,ST=Washington,C=US",
+      "issuer": "CN=MSIT CA Z1"
     },
     {
       "path": "BIN/SampleGeneralProfileForLargeServers.wprp",
@@ -117,9 +127,10 @@
       "extension": ".exe",
       "is_pe": true,
       "signed": true,
-      "signer": "C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft Corporation",
-      "product_version": "6.0.5227.0",
-      "company_name": "Microsoft Corporation"
+      "digest_match": true,
+      "chain_verified": false,
+      "signer": "CN=Microsoft Corporation,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US",
+      "issuer": "CN=Microsoft Code Signing PCA 2011,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US"
     },
     {
       "path": "BIN/Sysmon.exe",
@@ -128,9 +139,10 @@
       "extension": ".exe",
       "is_pe": true,
       "signed": true,
-      "signer": "C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft Windows Publisher",
-      "product_version": "15.20",
-      "company_name": "Sysinternals - www.sysinternals.com"
+      "digest_match": true,
+      "chain_verified": false,
+      "signer": "CN=Microsoft Windows Publisher,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US",
+      "issuer": "CN=Microsoft Windows Production PCA 2011,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US"
     },
     {
       "path": "BIN/VmlTrace.exe",
@@ -139,9 +151,10 @@
       "extension": ".exe",
       "is_pe": true,
       "signed": true,
-      "signer": "C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft Corporation",
-      "product_version": "10.0.17763.195",
-      "company_name": "Microsoft Corporation"
+      "digest_match": true,
+      "chain_verified": false,
+      "signer": "CN=Microsoft Corporation,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US",
+      "issuer": "CN=Microsoft Code Signing PCA 2011,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US"
     },
     {
       "path": "BIN/VmlTrace_2012.exe",
@@ -150,9 +163,10 @@
       "extension": ".exe",
       "is_pe": true,
       "signed": true,
-      "signer": "C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft Corporation",
-      "product_version": null,
-      "company_name": null
+      "digest_match": true,
+      "chain_verified": false,
+      "signer": "CN=Microsoft Corporation,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US",
+      "issuer": "CN=Microsoft Code Signing PCA 2011,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US"
     },
     {
       "path": "BIN/WinHTTPDiag.exe",
@@ -161,9 +175,10 @@
       "extension": ".exe",
       "is_pe": true,
       "signed": true,
-      "signer": "C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft Corporation",
-      "product_version": null,
-      "company_name": null
+      "digest_match": true,
+      "chain_verified": false,
+      "signer": "CN=Microsoft Corporation,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US",
+      "issuer": "CN=Microsoft Code Signing PCA 2011,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US"
     },
     {
       "path": "BIN/accesschk.exe",
@@ -172,9 +187,10 @@
       "extension": ".exe",
       "is_pe": true,
       "signed": true,
-      "signer": "C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft Corporation",
-      "product_version": "6.15",
-      "company_name": "Sysinternals - www.sysinternals.com"
+      "digest_match": true,
+      "chain_verified": false,
+      "signer": "CN=Microsoft Corporation,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US",
+      "issuer": "CN=Microsoft Code Signing PCA 2011,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US"
     },
     {
       "path": "BIN/autorunsc.exe",
@@ -183,9 +199,10 @@
       "extension": ".exe",
       "is_pe": true,
       "signed": true,
-      "signer": "C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft Corporation",
-      "product_version": "14.2",
-      "company_name": "Sysinternals - www.sysinternals.com"
+      "digest_match": true,
+      "chain_verified": false,
+      "signer": "CN=Microsoft Corporation,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US",
+      "issuer": "CN=Microsoft Code Signing PCA 2024,O=Microsoft Corporation,C=US"
     },
     {
       "path": "BIN/avdnettest.exe",
@@ -194,9 +211,10 @@
       "extension": ".exe",
       "is_pe": true,
       "signed": true,
-      "signer": "C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft Corporation",
-      "product_version": "1.2506.05003.08e38f9",
-      "company_name": null
+      "digest_match": true,
+      "chain_verified": false,
+      "signer": "CN=Microsoft Corporation,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US",
+      "issuer": "CN=Microsoft Code Signing PCA 2011,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US"
     },
     {
       "path": "BIN/devcon.exe",
@@ -205,9 +223,10 @@
       "extension": ".exe",
       "is_pe": true,
       "signed": true,
-      "signer": "C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft Corporation",
-      "product_version": "6.0.5203.0",
-      "company_name": "Microsoft Corporation"
+      "digest_match": true,
+      "chain_verified": false,
+      "signer": "CN=Microsoft Corporation,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US",
+      "issuer": "CN=Microsoft Code Signing PCA 2011,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US"
     },
     {
       "path": "BIN/diskspd.exe",
@@ -216,9 +235,10 @@
       "extension": ".exe",
       "is_pe": true,
       "signed": true,
-      "signer": "C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft Corporation",
-      "product_version": "2.2.0",
-      "company_name": "Microsoft Corporation"
+      "digest_match": true,
+      "chain_verified": false,
+      "signer": "CN=Microsoft Corporation,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US",
+      "issuer": "CN=Microsoft Code Signing PCA 2011,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US"
     },
     {
       "path": "BIN/fruti_1903.exe",
@@ -227,9 +247,10 @@
       "extension": ".exe",
       "is_pe": true,
       "signed": true,
-      "signer": "C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft Corporation",
-      "product_version": "10.0.18362.1",
-      "company_name": "Microsoft Corporation"
+      "digest_match": true,
+      "chain_verified": false,
+      "signer": "CN=Microsoft Corporation,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US",
+      "issuer": "CN=Microsoft Code Signing PCA 2011,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US"
     },
     {
       "path": "BIN/fruti_RS1.exe",
@@ -238,9 +259,10 @@
       "extension": ".exe",
       "is_pe": true,
       "signed": true,
-      "signer": "C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft Corporation",
-      "product_version": "10.0.14393.740",
-      "company_name": "Microsoft Corporation"
+      "digest_match": true,
+      "chain_verified": false,
+      "signer": "CN=Microsoft Corporation,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US",
+      "issuer": "CN=Microsoft Code Signing PCA 2011,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US"
     },
     {
       "path": "BIN/handle.exe",
@@ -249,9 +271,10 @@
       "extension": ".exe",
       "is_pe": true,
       "signed": true,
-      "signer": "C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft Corporation",
-      "product_version": "5.0",
-      "company_name": "Sysinternals - www.sysinternals.com"
+      "digest_match": true,
+      "chain_verified": false,
+      "signer": "CN=Microsoft Corporation,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US",
+      "issuer": "CN=Microsoft Code Signing PCA 2011,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US"
     },
     {
       "path": "BIN/kd.exe",
@@ -260,9 +283,10 @@
       "extension": ".exe",
       "is_pe": true,
       "signed": true,
-      "signer": "C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft Corporation",
-      "product_version": "10.0.16235.1007",
-      "company_name": "Microsoft Corporation"
+      "digest_match": true,
+      "chain_verified": false,
+      "signer": "CN=Microsoft Corporation,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US",
+      "issuer": "CN=Microsoft Code Signing PCA 2011,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US"
     },
     {
       "path": "BIN/livekd.exe",
@@ -271,9 +295,10 @@
       "extension": ".exe",
       "is_pe": true,
       "signed": true,
-      "signer": "C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft Corporation",
-      "product_version": "5.63",
-      "company_name": "Sysinternals - www.sysinternals.com"
+      "digest_match": true,
+      "chain_verified": false,
+      "signer": "CN=Microsoft Corporation,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US",
+      "issuer": "CN=Microsoft Code Signing PCA 2011,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US"
     },
     {
       "path": "BIN/npivtool.exe",
@@ -282,9 +307,10 @@
       "extension": ".exe",
       "is_pe": true,
       "signed": true,
-      "signer": "C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft Corporation",
-      "product_version": null,
-      "company_name": null
+      "digest_match": true,
+      "chain_verified": false,
+      "signer": "CN=Microsoft Corporation,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US",
+      "issuer": "CN=Microsoft Code Signing PCA 2011,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US"
     },
     {
       "path": "BIN/nvspinfo.exe",
@@ -293,9 +319,10 @@
       "extension": ".exe",
       "is_pe": true,
       "signed": true,
-      "signer": "C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft Windows",
-      "product_version": "10.0.26100.2033",
-      "company_name": "Microsoft Corporation"
+      "digest_match": true,
+      "chain_verified": false,
+      "signer": "CN=Microsoft Windows,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US",
+      "issuer": "CN=Microsoft Windows Production PCA 2011,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US"
     },
     {
       "path": "BIN/perfctrl.dll",
@@ -304,9 +331,10 @@
       "extension": ".dll",
       "is_pe": true,
       "signed": true,
-      "signer": "C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft Corporation",
-      "product_version": "10.0.26100.1",
-      "company_name": "Microsoft Corporation"
+      "digest_match": true,
+      "chain_verified": false,
+      "signer": "CN=Microsoft Corporation,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US",
+      "issuer": "CN=Microsoft Code Signing PCA 2010,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US"
     },
     {
       "path": "BIN/poolmon.exe",
@@ -315,9 +343,10 @@
       "extension": ".exe",
       "is_pe": true,
       "signed": true,
-      "signer": "C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft Corporation",
-      "product_version": "10.0.18362.1",
-      "company_name": "Microsoft Corporation"
+      "digest_match": true,
+      "chain_verified": false,
+      "signer": "CN=Microsoft Corporation,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US",
+      "issuer": "CN=Microsoft Code Signing PCA 2011,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US"
     },
     {
       "path": "BIN/procdump.exe",
@@ -326,9 +355,10 @@
       "extension": ".exe",
       "is_pe": true,
       "signed": true,
-      "signer": "C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft Corporation",
-      "product_version": "12.0",
-      "company_name": "Sysinternals - www.sysinternals.com"
+      "digest_match": true,
+      "chain_verified": false,
+      "signer": "CN=Microsoft Corporation,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US",
+      "issuer": "CN=Microsoft Code Signing PCA 2024,O=Microsoft Corporation,C=US"
     },
     {
       "path": "BIN/psping.exe",
@@ -337,9 +367,10 @@
       "extension": ".exe",
       "is_pe": true,
       "signed": true,
-      "signer": "C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft Corporation",
-      "product_version": "2.12",
-      "company_name": "Sysinternals - www.sysinternals.com"
+      "digest_match": true,
+      "chain_verified": false,
+      "signer": "CN=Microsoft Corporation,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US",
+      "issuer": "CN=Microsoft Code Signing PCA 2011,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US"
     },
     {
       "path": "BIN/rpccfg.exe",
@@ -348,9 +379,10 @@
       "extension": ".exe",
       "is_pe": true,
       "signed": true,
-      "signer": "C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft Corporation",
-      "product_version": null,
-      "company_name": null
+      "digest_match": true,
+      "chain_verified": false,
+      "signer": "CN=Microsoft Corporation,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US",
+      "issuer": "CN=Microsoft Code Signing PCA 2011,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US"
     },
     {
       "path": "BIN/rpcdump.exe",
@@ -359,9 +391,10 @@
       "extension": ".exe",
       "is_pe": true,
       "signed": true,
-      "signer": "C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft Corporation",
-      "product_version": "5.2.3790.0",
-      "company_name": "Microsoft Corporation"
+      "digest_match": true,
+      "chain_verified": false,
+      "signer": "CN=Microsoft Corporation,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US",
+      "issuer": "CN=Microsoft Code Signing PCA 2011,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US"
     },
     {
       "path": "BIN/windowsperformancerecordercontrol.dll",
@@ -370,9 +403,10 @@
       "extension": ".dll",
       "is_pe": true,
       "signed": true,
-      "signer": "C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft Corporation",
-      "product_version": "10.0.15063.0",
-      "company_name": "Microsoft Corporation"
+      "digest_match": true,
+      "chain_verified": false,
+      "signer": "CN=Microsoft Corporation,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US",
+      "issuer": "CN=Microsoft Code Signing PCA 2011,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US"
     },
     {
       "path": "BIN/wpr.config.xml",
@@ -387,9 +421,10 @@
       "extension": ".exe",
       "is_pe": true,
       "signed": true,
-      "signer": "C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft Corporation",
-      "product_version": "10.0.15063.0",
-      "company_name": "Microsoft Corporation"
+      "digest_match": true,
+      "chain_verified": false,
+      "signer": "CN=Microsoft Corporation,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US",
+      "issuer": "CN=Microsoft Code Signing PCA 2011,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US"
     },
     {
       "path": "BIN/xperf.exe",
@@ -398,9 +433,10 @@
       "extension": ".exe",
       "is_pe": true,
       "signed": true,
-      "signer": "C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft Corporation",
-      "product_version": "10.0.26100.1",
-      "company_name": "Microsoft Corporation"
+      "digest_match": true,
+      "chain_verified": false,
+      "signer": "CN=Microsoft Corporation,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US",
+      "issuer": "CN=Microsoft Code Signing PCA 2010,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US"
     },
     {
       "path": "BINARM/NTttcp.exe",
@@ -409,9 +445,10 @@
       "extension": ".exe",
       "is_pe": true,
       "signed": true,
-      "signer": "C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft Corporation",
-      "product_version": "5.40.0.99012574+6b86075f",
-      "company_name": "Microsoft Corporation"
+      "digest_match": true,
+      "chain_verified": false,
+      "signer": "CN=Microsoft Corporation,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US",
+      "issuer": "CN=Microsoft Code Signing PCA 2011,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US"
     },
     {
       "path": "BINARM/ProcDump.exe",
@@ -420,9 +457,10 @@
       "extension": ".exe",
       "is_pe": true,
       "signed": true,
-      "signer": "C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft Corporation",
-      "product_version": "12.0",
-      "company_name": "Sysinternals - www.sysinternals.com"
+      "digest_match": true,
+      "chain_verified": false,
+      "signer": "CN=Microsoft Corporation,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US",
+      "issuer": "CN=Microsoft Code Signing PCA 2024,O=Microsoft Corporation,C=US"
     },
     {
       "path": "BINARM/Procmon.exe",
@@ -431,9 +469,10 @@
       "extension": ".exe",
       "is_pe": true,
       "signed": true,
-      "signer": "C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft Corporation",
-      "product_version": "4.01",
-      "company_name": "Sysinternals - www.sysinternals.com"
+      "digest_match": true,
+      "chain_verified": false,
+      "signer": "CN=Microsoft Corporation,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US",
+      "issuer": "CN=Microsoft Code Signing PCA 2011,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US"
     },
     {
       "path": "BINARM/Sysmon64a.exe",
@@ -442,9 +481,10 @@
       "extension": ".exe",
       "is_pe": true,
       "signed": true,
-      "signer": "C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft Windows Publisher",
-      "product_version": "15.20",
-      "company_name": "Sysinternals - www.sysinternals.com"
+      "digest_match": true,
+      "chain_verified": false,
+      "signer": "CN=Microsoft Windows Publisher,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US",
+      "issuer": "CN=Microsoft Windows Production PCA 2011,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US"
     },
     {
       "path": "BINARM/notmyfaultc.exe",
@@ -453,9 +493,10 @@
       "extension": ".exe",
       "is_pe": true,
       "signed": true,
-      "signer": "C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft Corporation",
-      "product_version": "4.50",
-      "company_name": "Sysinternals - www.sysinternals.com"
+      "digest_match": true,
+      "chain_verified": false,
+      "signer": "CN=Microsoft Corporation,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US",
+      "issuer": "CN=Microsoft Code Signing PCA 2024,O=Microsoft Corporation,C=US"
     },
     {
       "path": "BINx64/Checksym.exe",
@@ -464,9 +505,10 @@
       "extension": ".exe",
       "is_pe": true,
       "signed": true,
-      "signer": "C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft Corporation",
-      "product_version": "6.0.5479.0",
-      "company_name": "Microsoft Corporation"
+      "digest_match": true,
+      "chain_verified": false,
+      "signer": "CN=Microsoft Corporation,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US",
+      "issuer": "CN=Microsoft Code Signing PCA 2011,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US"
     },
     {
       "path": "BINx64/NTttcp.exe",
@@ -475,9 +517,10 @@
       "extension": ".exe",
       "is_pe": true,
       "signed": true,
-      "signer": "C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft Corporation",
-      "product_version": "5.40.0.99012574+6b86075f",
-      "company_name": "Microsoft Corporation"
+      "digest_match": true,
+      "chain_verified": false,
+      "signer": "CN=Microsoft Corporation,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US",
+      "issuer": "CN=Microsoft Code Signing PCA 2011,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US"
     },
     {
       "path": "BINx64/PsGetsid.exe",
@@ -486,9 +529,10 @@
       "extension": ".exe",
       "is_pe": true,
       "signed": true,
-      "signer": "C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft Corporation",
-      "product_version": "1.46",
-      "company_name": "Sysinternals - www.sysinternals.com"
+      "digest_match": true,
+      "chain_verified": false,
+      "signer": "CN=Microsoft Corporation,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US",
+      "issuer": "CN=Microsoft Code Signing PCA 2011,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US"
     },
     {
       "path": "BINx64/Pstat.exe",
@@ -497,9 +541,10 @@
       "extension": ".exe",
       "is_pe": true,
       "signed": true,
-      "signer": "C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft Corporation",
-      "product_version": "6.0.6001.18000",
-      "company_name": "Microsoft Corporation"
+      "digest_match": true,
+      "chain_verified": false,
+      "signer": "CN=Microsoft Corporation,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US",
+      "issuer": "CN=Microsoft Code Signing PCA 2011,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US"
     },
     {
       "path": "BINx64/RecorderCommandLine.exe",
@@ -508,9 +553,10 @@
       "extension": ".exe",
       "is_pe": true,
       "signed": true,
-      "signer": "C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft Corporation",
-      "product_version": "2.0.57.0",
-      "company_name": "Microsoft Research"
+      "digest_match": true,
+      "chain_verified": false,
+      "signer": "CN=Microsoft Corporation,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US",
+      "issuer": "CN=Microsoft Code Signing PCA 2011,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US"
     },
     {
       "path": "BINx64/RecorderDll.dll",
@@ -519,9 +565,10 @@
       "extension": ".dll",
       "is_pe": true,
       "signed": true,
-      "signer": "C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft Corporation",
-      "product_version": "2.0.57.0",
-      "company_name": "Microsoft Research"
+      "digest_match": true,
+      "chain_verified": false,
+      "signer": "CN=Microsoft Corporation,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US",
+      "issuer": "CN=Microsoft Code Signing PCA 2011,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US"
     },
     {
       "path": "BINx64/SdkDll.dll",
@@ -530,9 +577,10 @@
       "extension": ".dll",
       "is_pe": true,
       "signed": true,
-      "signer": "C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft Corporation",
-      "product_version": null,
-      "company_name": null
+      "digest_match": true,
+      "chain_verified": false,
+      "signer": "CN=Microsoft Corporation,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US",
+      "issuer": "CN=Microsoft Code Signing PCA 2011,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US"
     },
     {
       "path": "BINx64/cscdbdump.exe",
@@ -541,9 +589,10 @@
       "extension": ".exe",
       "is_pe": true,
       "signed": true,
-      "signer": "C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft Corporation",
-      "product_version": null,
-      "company_name": null
+      "digest_match": true,
+      "chain_verified": false,
+      "signer": "CN=Microsoft Corporation,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US",
+      "issuer": "CN=Microsoft Code Signing PCA 2011,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US"
     },
     {
       "path": "BINx64/ctsTraffic.exe",
@@ -552,9 +601,10 @@
       "extension": ".exe",
       "is_pe": true,
       "signed": true,
-      "signer": "C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft Corporation",
-      "product_version": "2.0.3.5",
-      "company_name": "Microsoft \u00ae"
+      "digest_match": true,
+      "chain_verified": false,
+      "signer": "CN=Microsoft Corporation,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US",
+      "issuer": "CN=Microsoft Code Signing PCA 2011,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US"
     },
     {
       "path": "BINx64/dfsutil.exe",
@@ -563,9 +613,10 @@
       "extension": ".exe",
       "is_pe": true,
       "signed": true,
-      "signer": "C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft Corporation",
-      "product_version": "6.1.7600.16385",
-      "company_name": "Microsoft Corporation"
+      "digest_match": true,
+      "chain_verified": false,
+      "signer": "CN=Microsoft Corporation,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US",
+      "issuer": "CN=Microsoft Code Signing PCA 2011,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US"
     },
     {
       "path": "BINx64/dpmcmd.exe",
@@ -574,9 +625,10 @@
       "extension": ".exe",
       "is_pe": true,
       "signed": true,
-      "signer": "C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft Corporation",
-      "product_version": null,
-      "company_name": null
+      "digest_match": true,
+      "chain_verified": false,
+      "signer": "CN=Microsoft Corporation,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US",
+      "issuer": "CN=Microsoft Code Signing PCA 2011,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US"
     },
     {
       "path": "BINx64/du.exe",
@@ -585,9 +637,10 @@
       "extension": ".exe",
       "is_pe": true,
       "signed": true,
-      "signer": "C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft Corporation",
-      "product_version": "1.62",
-      "company_name": "Sysinternals - www.sysinternals.com"
+      "digest_match": true,
+      "chain_verified": false,
+      "signer": "CN=Microsoft Corporation,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US",
+      "issuer": "CN=Microsoft Code Signing PCA 2011,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US"
     },
     {
       "path": "BINx64/evparse.exe",
@@ -596,9 +649,10 @@
       "extension": ".exe",
       "is_pe": true,
       "signed": true,
-      "signer": "C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft Corporation",
-      "product_version": "1, 0, 6, 0",
-      "company_name": "Microsoft Corporation"
+      "digest_match": true,
+      "chain_verified": false,
+      "signer": "CN=Microsoft Corporation,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US",
+      "issuer": "CN=Microsoft Code Signing PCA 2011,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US"
     },
     {
       "path": "BINx64/fcinfo.exe",
@@ -607,9 +661,10 @@
       "extension": ".exe",
       "is_pe": true,
       "signed": true,
-      "signer": "C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft Corporation",
-      "product_version": "6.3.9600.16399",
-      "company_name": "Microsoft Corporation"
+      "digest_match": true,
+      "chain_verified": false,
+      "signer": "CN=Microsoft Corporation,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US",
+      "issuer": "CN=Microsoft Code Signing PCA 2011,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US"
     },
     {
       "path": "BINx64/get_dependencies.vbs",
@@ -624,9 +679,10 @@
       "extension": ".dll",
       "is_pe": true,
       "signed": true,
-      "signer": "C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft Corporation",
-      "product_version": "5.2.3790.3056",
-      "company_name": "Microsoft Corporation"
+      "digest_match": true,
+      "chain_verified": false,
+      "signer": "CN=Microsoft Corporation,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US",
+      "issuer": "CN=Microsoft Code Signing PCA 2011,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US"
     },
     {
       "path": "BINx64/hbatapi.dll",
@@ -635,9 +691,10 @@
       "extension": ".dll",
       "is_pe": true,
       "signed": true,
-      "signer": "C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft Corporation",
-      "product_version": null,
-      "company_name": null
+      "digest_match": true,
+      "chain_verified": false,
+      "signer": "CN=Microsoft Corporation,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US",
+      "issuer": "CN=Microsoft Code Signing PCA 2011,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US"
     },
     {
       "path": "BINx64/kdbgctrl.exe",
@@ -646,9 +703,10 @@
       "extension": ".exe",
       "is_pe": true,
       "signed": true,
-      "signer": "C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft Corporation",
-      "product_version": "10.0.20175.1002",
-      "company_name": "Microsoft Corporation"
+      "digest_match": true,
+      "chain_verified": false,
+      "signer": "CN=Microsoft Corporation,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US",
+      "issuer": "CN=Microsoft Code Signing PCA 2011,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US"
     },
     {
       "path": "BINx64/latte.exe",
@@ -657,9 +715,10 @@
       "extension": ".exe",
       "is_pe": true,
       "signed": true,
-      "signer": "C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft Corporation",
-      "product_version": null,
-      "company_name": null
+      "digest_match": true,
+      "chain_verified": false,
+      "signer": "CN=Microsoft Corporation,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US",
+      "issuer": "CN=Microsoft Code Signing PCA 2011,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US"
     },
     {
       "path": "BINx64/notmyfaultc.exe",
@@ -668,9 +727,10 @@
       "extension": ".exe",
       "is_pe": true,
       "signed": true,
-      "signer": "C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft Corporation",
-      "product_version": "4.50",
-      "company_name": "Sysinternals - www.sysinternals.com"
+      "digest_match": true,
+      "chain_verified": false,
+      "signer": "CN=Microsoft Corporation,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US",
+      "issuer": "CN=Microsoft Code Signing PCA 2024,O=Microsoft Corporation,C=US"
     },
     {
       "path": "BINx64/poolmon.exe",
@@ -679,9 +739,10 @@
       "extension": ".exe",
       "is_pe": true,
       "signed": true,
-      "signer": "C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft Corporation",
-      "product_version": "10.0.26100.2454",
-      "company_name": "Microsoft Corporation"
+      "digest_match": true,
+      "chain_verified": false,
+      "signer": "CN=Microsoft Corporation,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US",
+      "issuer": "CN=Microsoft Code Signing PCA 2010,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US"
     },
     {
       "path": "BINx64/tmq.exe",
@@ -690,9 +751,10 @@
       "extension": ".exe",
       "is_pe": true,
       "signed": true,
-      "signer": "C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft Corporation",
-      "product_version": "6.1.7656.0",
-      "company_name": "Microsoft Corporation"
+      "digest_match": true,
+      "chain_verified": false,
+      "signer": "CN=Microsoft Corporation,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US",
+      "issuer": "CN=Microsoft Code Signing PCA 2011,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US"
     },
     {
       "path": "BINx64/tmqbase.lib",
@@ -707,9 +769,10 @@
       "extension": ".dll",
       "is_pe": true,
       "signed": true,
-      "signer": "C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft Corporation",
-      "product_version": "6.1.7656.0",
-      "company_name": "Microsoft Corporation"
+      "digest_match": true,
+      "chain_verified": false,
+      "signer": "CN=Microsoft Corporation,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US",
+      "issuer": "CN=Microsoft Code Signing PCA 2011,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US"
     },
     {
       "path": "BINx64/tmqstate.dll",
@@ -718,9 +781,10 @@
       "extension": ".dll",
       "is_pe": true,
       "signed": true,
-      "signer": "C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft Corporation",
-      "product_version": "6.1.7656.0",
-      "company_name": "Microsoft Corporation"
+      "digest_match": true,
+      "chain_verified": false,
+      "signer": "CN=Microsoft Corporation,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US",
+      "issuer": "CN=Microsoft Code Signing PCA 2011,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US"
     },
     {
       "path": "BINx64/tmqstore.dll",
@@ -729,9 +793,10 @@
       "extension": ".dll",
       "is_pe": true,
       "signed": true,
-      "signer": "C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft Corporation",
-      "product_version": "6.1.7656.0",
-      "company_name": "Microsoft Corporation"
+      "digest_match": true,
+      "chain_verified": false,
+      "signer": "CN=Microsoft Corporation,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US",
+      "issuer": "CN=Microsoft Code Signing PCA 2011,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US"
     },
     {
       "path": "BINx64/tmqtry.dll",
@@ -740,9 +805,10 @@
       "extension": ".dll",
       "is_pe": true,
       "signed": true,
-      "signer": "C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft Corporation",
-      "product_version": "6.1.7656.0",
-      "company_name": "Microsoft Corporation"
+      "digest_match": true,
+      "chain_verified": false,
+      "signer": "CN=Microsoft Corporation,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US",
+      "issuer": "CN=Microsoft Code Signing PCA 2011,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US"
     },
     {
       "path": "BINx64/vshadow.exe",
@@ -751,9 +817,10 @@
       "extension": ".exe",
       "is_pe": true,
       "signed": true,
-      "signer": "C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft Corporation",
-      "product_version": "6.1.7600.16385",
-      "company_name": "Microsoft Corporation"
+      "digest_match": true,
+      "chain_verified": false,
+      "signer": "CN=Microsoft Corporation,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US",
+      "issuer": "CN=Microsoft Code Signing PCA 2011,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US"
     },
     {
       "path": "BINx64/vssagent.exe",
@@ -762,9 +829,10 @@
       "extension": ".exe",
       "is_pe": true,
       "signed": true,
-      "signer": "C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft Corporation",
-      "product_version": "6.1.7600.16385",
-      "company_name": "Microsoft Corporation"
+      "digest_match": true,
+      "chain_verified": false,
+      "signer": "CN=Microsoft Corporation,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US",
+      "issuer": "CN=Microsoft Code Signing PCA 2011,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US"
     },
     {
       "path": "BINx64/vsstrace.exe",
@@ -773,9 +841,10 @@
       "extension": ".exe",
       "is_pe": true,
       "signed": true,
-      "signer": "C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft Corporation",
-      "product_version": "6.1.7600.16385",
-      "company_name": "Microsoft Corporation"
+      "digest_match": true,
+      "chain_verified": false,
+      "signer": "CN=Microsoft Corporation,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US",
+      "issuer": "CN=Microsoft Code Signing PCA 2011,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US"
     },
     {
       "path": "BINx64/xbootmgr.exe",
@@ -784,9 +853,10 @@
       "extension": ".exe",
       "is_pe": true,
       "signed": true,
-      "signer": "C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft Corporation",
-      "product_version": "10.0.25265.1001",
-      "company_name": "Microsoft Corporation"
+      "digest_match": true,
+      "chain_verified": false,
+      "signer": "CN=Microsoft Corporation,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US",
+      "issuer": "CN=Microsoft Code Signing PCA 2011,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US"
     },
     {
       "path": "BINx86/Checksym.exe",
@@ -795,9 +865,10 @@
       "extension": ".exe",
       "is_pe": true,
       "signed": true,
-      "signer": "C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft Corporation",
-      "product_version": "6.0.5227.0",
-      "company_name": "Microsoft Corporation"
+      "digest_match": true,
+      "chain_verified": false,
+      "signer": "CN=Microsoft Corporation,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US",
+      "issuer": "CN=Microsoft Code Signing PCA 2011,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US"
     },
     {
       "path": "BINx86/NTttcp.exe",
@@ -806,9 +877,10 @@
       "extension": ".exe",
       "is_pe": true,
       "signed": true,
-      "signer": "C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft Corporation",
-      "product_version": "10.0.14393.0",
-      "company_name": "Microsoft Corporation"
+      "digest_match": true,
+      "chain_verified": false,
+      "signer": "CN=Microsoft Corporation,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US",
+      "issuer": "CN=Microsoft Code Signing PCA 2011,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US"
     },
     {
       "path": "BINx86/PsGetsid.exe",
@@ -817,9 +889,10 @@
       "extension": ".exe",
       "is_pe": true,
       "signed": true,
-      "signer": "C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft Corporation",
-      "product_version": "1.46",
-      "company_name": "Sysinternals - www.sysinternals.com"
+      "digest_match": true,
+      "chain_verified": false,
+      "signer": "CN=Microsoft Corporation,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US",
+      "issuer": "CN=Microsoft Code Signing PCA 2011,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US"
     },
     {
       "path": "BINx86/Pstat.exe",
@@ -828,9 +901,10 @@
       "extension": ".exe",
       "is_pe": true,
       "signed": true,
-      "signer": "C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft Corporation",
-      "product_version": "6.0.6001.18000",
-      "company_name": "Microsoft Corporation"
+      "digest_match": true,
+      "chain_verified": false,
+      "signer": "CN=Microsoft Corporation,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US",
+      "issuer": "CN=Microsoft Code Signing PCA 2011,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US"
     },
     {
       "path": "BINx86/RecorderCommandLine.exe",
@@ -839,9 +913,10 @@
       "extension": ".exe",
       "is_pe": true,
       "signed": true,
-      "signer": "C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft Corporation",
-      "product_version": "2.0.57.0",
-      "company_name": "Microsoft Research"
+      "digest_match": true,
+      "chain_verified": false,
+      "signer": "CN=Microsoft Corporation,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US",
+      "issuer": "CN=Microsoft Code Signing PCA 2011,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US"
     },
     {
       "path": "BINx86/RecorderDll.dll",
@@ -850,9 +925,10 @@
       "extension": ".dll",
       "is_pe": true,
       "signed": true,
-      "signer": "C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft Corporation",
-      "product_version": "2.0.57.0",
-      "company_name": "Microsoft Research"
+      "digest_match": true,
+      "chain_verified": false,
+      "signer": "CN=Microsoft Corporation,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US",
+      "issuer": "CN=Microsoft Code Signing PCA 2011,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US"
     },
     {
       "path": "BINx86/SdkDll.dll",
@@ -861,9 +937,10 @@
       "extension": ".dll",
       "is_pe": true,
       "signed": true,
-      "signer": "C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft Corporation",
-      "product_version": null,
-      "company_name": null
+      "digest_match": true,
+      "chain_verified": false,
+      "signer": "CN=Microsoft Corporation,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US",
+      "issuer": "CN=Microsoft Code Signing PCA 2011,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US"
     },
     {
       "path": "BINx86/cscdbdump.exe",
@@ -872,9 +949,10 @@
       "extension": ".exe",
       "is_pe": true,
       "signed": true,
-      "signer": "C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft Corporation",
-      "product_version": null,
-      "company_name": null
+      "digest_match": true,
+      "chain_verified": false,
+      "signer": "CN=Microsoft Corporation,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US",
+      "issuer": "CN=Microsoft Code Signing PCA 2011,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US"
     },
     {
       "path": "BINx86/dfsutil.exe",
@@ -883,9 +961,10 @@
       "extension": ".exe",
       "is_pe": true,
       "signed": true,
-      "signer": "C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft Corporation",
-      "product_version": "6.0.6001.18000",
-      "company_name": "Microsoft Corporation"
+      "digest_match": true,
+      "chain_verified": false,
+      "signer": "CN=Microsoft Corporation,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US",
+      "issuer": "CN=Microsoft Code Signing PCA 2011,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US"
     },
     {
       "path": "BINx86/dpmcmd.exe",
@@ -894,9 +973,10 @@
       "extension": ".exe",
       "is_pe": true,
       "signed": true,
-      "signer": "C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft Corporation",
-      "product_version": null,
-      "company_name": null
+      "digest_match": true,
+      "chain_verified": false,
+      "signer": "CN=Microsoft Corporation,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US",
+      "issuer": "CN=Microsoft Code Signing PCA 2011,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US"
     },
     {
       "path": "BINx86/du.exe",
@@ -905,9 +985,10 @@
       "extension": ".exe",
       "is_pe": true,
       "signed": true,
-      "signer": "C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft Corporation",
-      "product_version": "1.62",
-      "company_name": "Sysinternals - www.sysinternals.com"
+      "digest_match": true,
+      "chain_verified": false,
+      "signer": "CN=Microsoft Corporation,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US",
+      "issuer": "CN=Microsoft Code Signing PCA 2011,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US"
     },
     {
       "path": "BINx86/evparse.exe",
@@ -916,9 +997,10 @@
       "extension": ".exe",
       "is_pe": true,
       "signed": true,
-      "signer": "C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft Corporation",
-      "product_version": "1, 0, 6, 0",
-      "company_name": "Microsoft Corporation"
+      "digest_match": true,
+      "chain_verified": false,
+      "signer": "CN=Microsoft Corporation,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US",
+      "issuer": "CN=Microsoft Code Signing PCA 2011,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US"
     },
     {
       "path": "BINx86/fcinfo.exe",
@@ -927,9 +1009,10 @@
       "extension": ".exe",
       "is_pe": true,
       "signed": true,
-      "signer": "C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft Corporation",
-      "product_version": "6.0.5721.0",
-      "company_name": "Microsoft Corporation"
+      "digest_match": true,
+      "chain_verified": false,
+      "signer": "CN=Microsoft Corporation,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US",
+      "issuer": "CN=Microsoft Code Signing PCA 2011,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US"
     },
     {
       "path": "BINx86/get_dependencies.vbs",
@@ -944,9 +1027,10 @@
       "extension": ".dll",
       "is_pe": true,
       "signed": true,
-      "signer": "C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft Corporation",
-      "product_version": "5.2.3790.3056",
-      "company_name": "Microsoft Corporation"
+      "digest_match": true,
+      "chain_verified": false,
+      "signer": "CN=Microsoft Corporation,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US",
+      "issuer": "CN=Microsoft Code Signing PCA 2011,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US"
     },
     {
       "path": "BINx86/hbatapi.dll",
@@ -955,9 +1039,10 @@
       "extension": ".dll",
       "is_pe": true,
       "signed": true,
-      "signer": "C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft Corporation",
-      "product_version": null,
-      "company_name": null
+      "digest_match": true,
+      "chain_verified": false,
+      "signer": "CN=Microsoft Corporation,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US",
+      "issuer": "CN=Microsoft Code Signing PCA 2011,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US"
     },
     {
       "path": "BINx86/notmyfaultc.exe",
@@ -966,9 +1051,10 @@
       "extension": ".exe",
       "is_pe": true,
       "signed": true,
-      "signer": "C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft Corporation",
-      "product_version": "4.50",
-      "company_name": "Sysinternals - www.sysinternals.com"
+      "digest_match": true,
+      "chain_verified": false,
+      "signer": "CN=Microsoft Corporation,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US",
+      "issuer": "CN=Microsoft Code Signing PCA 2024,O=Microsoft Corporation,C=US"
     },
     {
       "path": "BINx86/vshadow.exe",
@@ -977,9 +1063,10 @@
       "extension": ".exe",
       "is_pe": true,
       "signed": true,
-      "signer": "C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft Corporation",
-      "product_version": "6.1.7600.16385",
-      "company_name": "Microsoft Corporation"
+      "digest_match": true,
+      "chain_verified": false,
+      "signer": "CN=Microsoft Corporation,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US",
+      "issuer": "CN=Microsoft Code Signing PCA 2011,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US"
     },
     {
       "path": "BINx86/vssagent.exe",
@@ -988,9 +1075,10 @@
       "extension": ".exe",
       "is_pe": true,
       "signed": true,
-      "signer": "C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft Corporation",
-      "product_version": "6.1.7600.16385",
-      "company_name": "Microsoft Corporation"
+      "digest_match": true,
+      "chain_verified": false,
+      "signer": "CN=Microsoft Corporation,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US",
+      "issuer": "CN=Microsoft Code Signing PCA 2011,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US"
     },
     {
       "path": "BINx86/vsstrace.exe",
@@ -999,9 +1087,10 @@
       "extension": ".exe",
       "is_pe": true,
       "signed": true,
-      "signer": "C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft Corporation",
-      "product_version": "6.1.7600.16385",
-      "company_name": "Microsoft Corporation"
+      "digest_match": true,
+      "chain_verified": false,
+      "signer": "CN=Microsoft Corporation,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US",
+      "issuer": "CN=Microsoft Code Signing PCA 2011,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US"
     },
     {
       "path": "TSS.ps1",
@@ -1244,9 +1333,10 @@
       "extension": ".dll",
       "is_pe": true,
       "signed": false,
+      "digest_match": null,
+      "chain_verified": null,
       "signer": null,
-      "product_version": null,
-      "company_name": null
+      "issuer": null
     },
     {
       "path": "config/ProcmonConfiguration.pmc",
@@ -3925,9 +4015,10 @@
       "extension": ".dll",
       "is_pe": true,
       "signed": true,
-      "signer": "C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft Corporation",
-      "product_version": "1, 0, 0, 1",
-      "company_name": null
+      "digest_match": true,
+      "chain_verified": false,
+      "signer": "CN=Microsoft Corporation,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US",
+      "issuer": "CN=Microsoft Code Signing PCA 2011,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US"
     },
     {
       "path": "psSDP/Diag/global/DiagPackage_APPS.diagpkg",
@@ -4086,9 +4177,10 @@
       "extension": ".exe",
       "is_pe": true,
       "signed": true,
-      "signer": "C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft Corporation",
-      "product_version": null,
-      "company_name": null
+      "digest_match": true,
+      "chain_verified": false,
+      "signer": "CN=Microsoft Corporation,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US",
+      "issuer": "CN=Microsoft Code Signing PCA 2011,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US"
     },
     {
       "path": "psSDP/Diag/global/Eula-CSS.ps1",
@@ -4235,9 +4327,10 @@
       "extension": ".exe",
       "is_pe": true,
       "signed": true,
-      "signer": "C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft Corporation",
-      "product_version": "1.9.0027.0",
-      "company_name": "Microsoft Corporation"
+      "digest_match": true,
+      "chain_verified": false,
+      "signer": "CN=Microsoft Corporation,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US",
+      "issuer": "CN=Microsoft Code Signing PCA 2011,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US"
     },
     {
       "path": "psSDP/Diag/global/OTPTrace.xml",
@@ -4534,9 +4627,10 @@
       "extension": ".exe",
       "is_pe": true,
       "signed": true,
-      "signer": "C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft Corporation",
-      "product_version": "6.1.0.16",
-      "company_name": "Microsoft"
+      "digest_match": true,
+      "chain_verified": false,
+      "signer": "CN=Microsoft Corporation,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US",
+      "issuer": "CN=Microsoft Code Signing PCA 2011,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US"
     },
     {
       "path": "psSDP/Diag/global/SQL_Debug_Registry.ps1",
@@ -4587,9 +4681,10 @@
       "extension": ".exe",
       "is_pe": true,
       "signed": true,
-      "signer": "C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft Corporation",
-      "product_version": "6.0.5227.0",
-      "company_name": "Microsoft Corporation"
+      "digest_match": true,
+      "chain_verified": false,
+      "signer": "CN=Microsoft Corporation,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US",
+      "issuer": "CN=Microsoft Code Signing PCA 2011,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US"
     },
     {
       "path": "psSDP/Diag/global/SummaryReliability.vbs",
@@ -7262,9 +7357,10 @@
       "extension": ".exe",
       "is_pe": true,
       "signed": true,
-      "signer": "C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft Corporation",
-      "product_version": "6.2.8411.0",
-      "company_name": "Microsoft Corporation"
+      "digest_match": true,
+      "chain_verified": false,
+      "signer": "CN=Microsoft Corporation,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US",
+      "issuer": "CN=Microsoft Code Signing PCA 2011,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US"
     },
     {
       "path": "psSDP/Diag/global/WSRUNI386.EXE",
@@ -7273,9 +7369,10 @@
       "extension": ".exe",
       "is_pe": true,
       "signed": true,
-      "signer": "C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft Corporation",
-      "product_version": "6.2.8411.0",
-      "company_name": "Microsoft Corporation"
+      "digest_match": true,
+      "chain_verified": false,
+      "signer": "CN=Microsoft Corporation,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US",
+      "issuer": "CN=Microsoft Code Signing PCA 2011,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US"
     },
     {
       "path": "psSDP/Diag/global/WSRunCommand.wsrun",
@@ -7326,9 +7423,10 @@
       "extension": ".exe",
       "is_pe": true,
       "signed": true,
-      "signer": "C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft Corporation",
-      "product_version": "11.21",
-      "company_name": "Sysinternals - www.sysinternals.com"
+      "digest_match": true,
+      "chain_verified": false,
+      "signer": "CN=Microsoft Corporation,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US",
+      "issuer": "CN=Microsoft Code Signing PCA 2011,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US"
     },
     {
       "path": "psSDP/Diag/global/cdb.exe",
@@ -7337,9 +7435,10 @@
       "extension": ".exe",
       "is_pe": true,
       "signed": true,
-      "signer": "C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft Corporation",
-      "product_version": "6.2.9200.16384",
-      "company_name": "Microsoft Corporation"
+      "digest_match": true,
+      "chain_verified": false,
+      "signer": "CN=Microsoft Corporation,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US",
+      "issuer": "CN=Microsoft Code Signing PCA 2011,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US"
     },
     {
       "path": "psSDP/Diag/global/certadm.dll",
@@ -7348,9 +7447,10 @@
       "extension": ".dll",
       "is_pe": true,
       "signed": true,
-      "signer": "C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft Corporation",
-      "product_version": "5.2.3790.0",
-      "company_name": "Microsoft Corporation"
+      "digest_match": true,
+      "chain_verified": false,
+      "signer": "CN=Microsoft Corporation,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US",
+      "issuer": "CN=Microsoft Code Signing PCA 2011,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US"
     },
     {
       "path": "psSDP/Diag/global/clusmps.exe",
@@ -7359,9 +7459,10 @@
       "extension": ".exe",
       "is_pe": true,
       "signed": true,
-      "signer": "C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft Corporation",
-      "product_version": "2, 2, 0, 0",
-      "company_name": null
+      "digest_match": true,
+      "chain_verified": false,
+      "signer": "CN=Microsoft Corporation,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US",
+      "issuer": "CN=Microsoft Code Signing PCA 2011,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US"
     },
     {
       "path": "psSDP/Diag/global/cts_results.xsl",
@@ -7376,9 +7477,10 @@
       "extension": ".dll",
       "is_pe": true,
       "signed": true,
-      "signer": "C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft Corporation",
-      "product_version": "6.2.9200.16384",
-      "company_name": "Microsoft Corporation"
+      "digest_match": true,
+      "chain_verified": false,
+      "signer": "CN=Microsoft Corporation,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US",
+      "issuer": "CN=Microsoft Code Signing PCA 2011,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US"
     },
     {
       "path": "psSDP/Diag/global/dbghelp.dll",
@@ -7387,9 +7489,10 @@
       "extension": ".dll",
       "is_pe": true,
       "signed": true,
-      "signer": "C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft Corporation",
-      "product_version": "6.2.9200.16384",
-      "company_name": "Microsoft Corporation"
+      "digest_match": true,
+      "chain_verified": false,
+      "signer": "CN=Microsoft Corporation,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US",
+      "issuer": "CN=Microsoft Code Signing PCA 2011,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US"
     },
     {
       "path": "psSDP/Diag/global/dc_PoolMon.psd1",
@@ -7686,9 +7789,10 @@
       "extension": ".exe",
       "is_pe": true,
       "signed": true,
-      "signer": "C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft Corporation",
-      "product_version": "6.0.5203.0",
-      "company_name": "Microsoft Corporation"
+      "digest_match": true,
+      "chain_verified": false,
+      "signer": "CN=Microsoft Corporation,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US",
+      "issuer": "CN=Microsoft Code Signing PCA 2011,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US"
     },
     {
       "path": "psSDP/Diag/global/dosdev.exe",
@@ -7697,9 +7801,10 @@
       "extension": ".exe",
       "is_pe": true,
       "signed": true,
-      "signer": "C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft Corporation",
-      "product_version": "6.0.5203.0",
-      "company_name": "Microsoft Corporation"
+      "digest_match": true,
+      "chain_verified": false,
+      "signer": "CN=Microsoft Corporation,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US",
+      "issuer": "CN=Microsoft Code Signing PCA 2011,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US"
     },
     {
       "path": "psSDP/Diag/global/evparse_storage.xsl",
@@ -7720,9 +7825,10 @@
       "extension": ".exe",
       "is_pe": true,
       "signed": true,
-      "signer": "C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft Corporation",
-      "product_version": "6.0.5203.0",
-      "company_name": "Microsoft Corporation"
+      "digest_match": true,
+      "chain_verified": false,
+      "signer": "CN=Microsoft Corporation,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US",
+      "issuer": "CN=Microsoft Code Signing PCA 2011,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US"
     },
     {
       "path": "psSDP/Diag/global/getsqlsetuplogsfile.psd1",
@@ -7737,9 +7843,10 @@
       "extension": ".exe",
       "is_pe": true,
       "signed": true,
-      "signer": "C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft Corporation",
-      "product_version": "5.2.3790.0",
-      "company_name": "Microsoft Corporation"
+      "digest_match": true,
+      "chain_verified": false,
+      "signer": "CN=Microsoft Corporation,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US",
+      "issuer": "CN=Microsoft Code Signing PCA 2011,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US"
     },
     {
       "path": "psSDP/Diag/global/nvspinfo_downlevel.js",
@@ -8132,9 +8239,10 @@
       "extension": ".exe",
       "is_pe": true,
       "signed": true,
-      "signer": "C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft Corporation",
-      "product_version": "6.1.7600.16385",
-      "company_name": "Microsoft Corporation"
+      "digest_match": true,
+      "chain_verified": false,
+      "signer": "CN=Microsoft Corporation,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US",
+      "issuer": "CN=Microsoft Code Signing PCA 2011,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US"
     },
     {
       "path": "psSDP/Diag/global/vshadow.exe",
@@ -8143,9 +8251,10 @@
       "extension": ".exe",
       "is_pe": true,
       "signed": true,
-      "signer": "C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft Corporation",
-      "product_version": null,
-      "company_name": null
+      "digest_match": true,
+      "chain_verified": false,
+      "signer": "CN=Microsoft Corporation,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US",
+      "issuer": "CN=Microsoft Code Signing PCA 2011,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US"
     },
     {
       "path": "psSDP/Get-psSDP.ps1",
@@ -8202,9 +8311,10 @@
       "extension": ".exe",
       "is_pe": true,
       "signed": true,
-      "signer": "C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft Corporation",
-      "product_version": "1.0.0.0",
-      "company_name": null
+      "digest_match": true,
+      "chain_verified": false,
+      "signer": "CN=Microsoft Corporation,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US",
+      "issuer": "CN=Microsoft Code Signing PCA 2011,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US"
     },
     {
       "path": "scripts/CRUtil/CredRoamADUserCmdLet.dll",
@@ -8213,9 +8323,10 @@
       "extension": ".dll",
       "is_pe": true,
       "signed": true,
-      "signer": "C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft Corporation",
-      "product_version": "1.0.0.0",
-      "company_name": "MS"
+      "digest_match": true,
+      "chain_verified": false,
+      "signer": "CN=Microsoft Corporation,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US",
+      "issuer": "CN=Microsoft Code Signing PCA 2011,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US"
     },
     {
       "path": "scripts/CRUtil/CredRoamADUserCmdLetAMD64.dll",
@@ -8224,9 +8335,10 @@
       "extension": ".dll",
       "is_pe": true,
       "signed": true,
-      "signer": "C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft Corporation",
-      "product_version": "1.0.0.0",
-      "company_name": "MS"
+      "digest_match": true,
+      "chain_verified": false,
+      "signer": "CN=Microsoft Corporation,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US",
+      "issuer": "CN=Microsoft Code Signing PCA 2011,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US"
     },
     {
       "path": "scripts/CRUtil/CredRoamLVRCmdLet.dll",
@@ -8235,9 +8347,10 @@
       "extension": ".dll",
       "is_pe": true,
       "signed": true,
-      "signer": "C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft Corporation",
-      "product_version": "1.0.0.0",
-      "company_name": "MS"
+      "digest_match": true,
+      "chain_verified": false,
+      "signer": "CN=Microsoft Corporation,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US",
+      "issuer": "CN=Microsoft Code Signing PCA 2011,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US"
     },
     {
       "path": "scripts/CRUtil/CredRoamLVRCmdLetAMD64.dll",
@@ -8246,9 +8359,10 @@
       "extension": ".dll",
       "is_pe": true,
       "signed": true,
-      "signer": "C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft Corporation",
-      "product_version": "1.0.0.0",
-      "company_name": "MS"
+      "digest_match": true,
+      "chain_verified": false,
+      "signer": "CN=Microsoft Corporation,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US",
+      "issuer": "CN=Microsoft Code Signing PCA 2011,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US"
     },
     {
       "path": "scripts/CRUtil/CredRoamLocalUserData.dll",
@@ -8257,9 +8371,10 @@
       "extension": ".dll",
       "is_pe": true,
       "signed": true,
-      "signer": "C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft Corporation",
-      "product_version": "1.0.0.0",
-      "company_name": "MS"
+      "digest_match": true,
+      "chain_verified": false,
+      "signer": "CN=Microsoft Corporation,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US",
+      "issuer": "CN=Microsoft Code Signing PCA 2011,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US"
     },
     {
       "path": "scripts/CRUtil/Credential_Roaming_Script_Usage.txt",
@@ -9516,9 +9631,10 @@
       "extension": ".sys",
       "is_pe": true,
       "signed": true,
-      "signer": "C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft Windows Hardware Compatibility Publisher",
-      "product_version": "3.91",
-      "company_name": "Sysinternals - www.sysinternals.com"
+      "digest_match": true,
+      "chain_verified": false,
+      "signer": "CN=Microsoft Windows Hardware Compatibility Publisher,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US",
+      "issuer": "CN=Microsoft Windows Third Party Component CA 2012,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US"
     },
     {
       "path": "scripts/WinPE/_WinPE_README(Instructions).txt",

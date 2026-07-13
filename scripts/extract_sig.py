@@ -1,4 +1,10 @@
-import pefile, sys, struct, subprocess, os
+import pefile, sys, struct, subprocess, os, tempfile
+
+# NOTE: this extracts and prints the leaf certificate SUBJECT only — it does
+# NOT cryptographically verify the signature (no digest recomputation, no
+# chain validation). For real Authenticode verification (digest match +
+# chain-to-root), use `osslsigncode verify <file>` instead, as gen_bom.py
+# now does. This script is kept as a lightweight standalone inspector.
 
 targets = sys.argv[1:]
 for path in targets:
@@ -27,13 +33,14 @@ for path in targets:
         if length == 0:
             break
         der = cert_table[off+8: off+length]
-        sig_path = f"/tmp/claude-1000/-home-yarin-Projects/8eb9bcaa-a105-4e06-a715-4bb256cf86c4/scratchpad/tss/{name}.p7"
-        with open(sig_path, 'wb') as sf:
+        with tempfile.NamedTemporaryFile(suffix=".p7") as sf:
             sf.write(der)
-        result = subprocess.run(['openssl','pkcs7','-inform','DER','-in',sig_path,'-print_certs','-noout'],
-                                 capture_output=True, text=True)
+            sf.flush()
+            result = subprocess.run(['openssl', 'pkcs7', '-inform', 'DER', '-in', sf.name,
+                                      '-print_certs', '-noout'],
+                                     capture_output=True, text=True)
         subjects = [l for l in result.stdout.splitlines() if l.startswith('subject=')]
-        print(f"{name}: SIGNED, certs found: {len(subjects)}")
+        print(f"{name}: cert blob present, certs found: {len(subjects)} (subject presence only, not verified)")
         for s in subjects:
             print(f"   {s}")
         found = True

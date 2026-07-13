@@ -24,8 +24,10 @@ doc.add_paragraph(
     "The archive bundles 1,531 files, including 115 native PE binaries (Sysinternals-class tools: Procmon, "
     "Sysmon, procdump, xperf, wpr, psping, rpcdump, rpccfg, etc.) alongside PowerShell modules for ETW "
     "tracing, packet capture, and log collection across many Windows subsystems. 114 of 115 PE binaries "
-    "carry valid Microsoft Authenticode signatures; the one unsigned PE is a resource-only icon DLL with "
-    "no executable code, which is normal and low-risk."
+    "carry Microsoft Authenticode signatures; for all 114, the PE digest was cryptographically recomputed "
+    "and confirmed to match the embedded signed digest (zero mismatches — no evidence of tampering). "
+    "Full chain-to-root validation was not completed (see 3.4). The one unsigned PE is a resource-only "
+    "icon DLL with no executable code, which is normal and low-risk."
 )
 doc.add_paragraph(
     "Primary risk is CAPABILITY, not AUTHENTICITY: this is a legitimately signed, high-privilege diagnostic "
@@ -40,8 +42,9 @@ for line in [
     "Resolved the aka.ms/gettss short link and captured the full HTTP redirect chain.",
     "Downloaded the resolved archive directly from download.microsoft.com and computed its SHA-256.",
     "Extracted and enumerated all 1,531 files; computed SHA-256 for every file (full BOM, attached separately).",
-    "Extracted embedded Authenticode PKCS#7 signature blocks from all PE binaries and validated certificate "
-    "chain subjects/issuers via OpenSSL.",
+    "Verified embedded Authenticode signatures on all 115 PE binaries via osslsigncode: recomputed each "
+    "binary's PE digest and compared it to the digest embedded in the signature (proves the signed bytes "
+    "match what's on disk) — not merely checking for the presence of a certificate subject string.",
     "Searched GitHub for canonical upstream source / provenance and cross-referenced against the unrelated "
     "microsoft/TSS.MSR (TPM stack) repository to rule out name-collision confusion.",
 ]:
@@ -88,11 +91,25 @@ doc.add_heading("3.4 Authenticode signature verification", level=2)
 pe_rows = [r for r in bom["files"] if r.get("is_pe")]
 signed = [r for r in pe_rows if r.get("signed")]
 unsigned = [r for r in pe_rows if not r.get("signed")]
-doc.add_paragraph(f"PE binaries found: {len(pe_rows)}  |  Signed: {len(signed)}  |  Unsigned: {len(unsigned)}")
-table2 = doc.add_table(rows=1, cols=2)
+digest_ok = [r for r in signed if r.get("digest_match")]
+digest_bad = [r for r in signed if r.get("digest_match") is False]
+doc.add_paragraph(
+    f"PE binaries found: {len(pe_rows)}  |  Signed (certificate present): {len(signed)}  |  "
+    f"Unsigned: {len(unsigned)}  |  Digest verified match: {len(digest_ok)}  |  Digest mismatch: {len(digest_bad)}"
+)
+doc.add_paragraph(
+    "Verification method: osslsigncode verify was run against all 115 PE binaries. For each signed binary, "
+    "this recomputes the Authenticode PE hash from the file's actual bytes (excluding the checksum and "
+    "certificate table fields, per the Authenticode spec) and compares it to the digest embedded inside the "
+    "PKCS#7 signature. A match cryptographically proves the file has not been altered since it was signed. "
+    "This is a materially stronger check than earlier tooling in this review's history that only confirmed "
+    "a certificate subject string was present in the signature blob without verifying the digest — that "
+    "weaker method has been superseded."
+)
+table2 = doc.add_table(rows=1, cols=3)
 table2.style = "Light Grid Accent 1"
 hdr2 = table2.rows[0].cells
-hdr2[0].text, hdr2[1].text = "Binary (sample)", "Certificate Subject"
+hdr2[0].text, hdr2[1].text, hdr2[2].text = "Binary (sample)", "Certificate Subject", "Digest Match"
 samples = ["BIN/xperf.exe", "BIN/wpr.exe", "BIN/Procmon.exe", "BIN/Sysmon.exe",
            "BIN/procdump.exe", "BIN/psping.exe", "BIN/rpcdump.exe", "BIN/rpccfg.exe"]
 by_path = {r["path"]: r for r in bom["files"]}
@@ -102,11 +119,21 @@ for s in samples:
         row = table2.add_row().cells
         row[0].text = s
         row[1].text = r.get("signer") or "N/A"
+        row[2].text = "Yes" if r.get("digest_match") else str(r.get("digest_match"))
 
 doc.add_paragraph(
-    "All sampled signed binaries chain to genuine Microsoft Corporation leaf certificates issued under "
-    "Microsoft Code Signing PCA (2010/2011/2024) or Windows Production PCA intermediates. No evidence of "
+    f"All {len(signed)} signed binaries carry Microsoft Corporation leaf certificates issued under "
+    "Microsoft Code Signing PCA (2010/2011/2024) or Windows Production PCA intermediates, and all "
+    f"{len(digest_ok)} of them passed digest verification (0 mismatches). No evidence of tampering, "
     "spoofed, self-signed, or third-party-substituted certificates was found."
+)
+doc.add_paragraph(
+    "Chain-to-root validation (verifying the certificate chain up to a trusted Microsoft root CA, plus "
+    "CRL/OCSP revocation status) was attempted but could not be completed in this environment, because the "
+    "local OpenSSL trust store does not include Microsoft's code-signing root CAs — osslsigncode correctly "
+    "reports 'unable to get local issuer certificate' for the root hop, which is an environment limitation, "
+    "not a finding about the binaries themselves. The digest-match result above is independent of this "
+    "limitation and stands on its own as integrity evidence."
 )
 doc.add_heading("3.4.1 Unsigned PE finding", level=3)
 table_unsigned = doc.add_table(rows=1, cols=4)
@@ -133,11 +160,10 @@ doc.add_paragraph(
     "low-risk pattern and does not indicate tampering."
 )
 doc.add_paragraph(
-    "Not verified in this review: full X.509 chain-of-trust / CRL / OCSP revocation status, and RFC3161 "
-    "timestamp countersignature validity (no Windows signtool available in the review environment). Leaf "
-    "certificate validity windows on sampled binaries were in the past relative to the review date, which "
-    "is expected/normal for Authenticode when covered by a timestamp countersignature and is not itself "
-    "an indicator of tampering."
+    "Also not verified in this review: RFC3161 timestamp countersignature validity (no Windows signtool "
+    "available in the review environment). Leaf certificate validity windows on sampled binaries were in "
+    "the past relative to the review date, which is expected/normal for Authenticode when covered by a "
+    "timestamp countersignature and is not itself an indicator of tampering."
 )
 
 doc.add_heading("3.4.2 Weak-link analysis: could the unsigned DLL compromise the solution?", level=3)
@@ -179,7 +205,9 @@ doc.add_paragraph(
 doc.add_heading("3.5 Provenance / upstream identity", level=2)
 doc.add_paragraph(
     "No official microsoft/* GitHub repository hosts this toolkit under the TSS name; microsoft/TSS.MSR is "
-    "an unrelated TPM 2.0 software stack project (confirmed via empty/irrelevant release history). Multiple "
+    "a separate, actively maintained Microsoft Research project implementing the TPM 2.0 software stack — "
+    "confirmed unrelated to this toolkit by description and content, not by release-history emptiness (that "
+    "repository is active). Multiple "
     "independent community GitHub mirrors were found with matching file structure and identical internal "
     "warning strings (e.g. rsessa/TSS, andreipintica/TSSV2), consistent with a tool that circulates "
     "informally. The likely original author is Walter Eder, a Microsoft support/field engineer whose GitHub "

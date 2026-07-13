@@ -16,11 +16,14 @@ See [`TSS_Security_Review.docx`](TSS_Security_Review.docx) for the full report.
 - `TSS_Security_Review.docx` — full report: link resolution, archive contents, Authenticode verification,
   provenance research, risk assessment, and recommendations.
 - `bom.json` / `bom.csv` — full file-level Bill of Materials for the 1,531-file archive: path, size,
-  SHA-256, and (for PE binaries) signed status, certificate signer, product version.
+  SHA-256, and (for PE binaries) signed status, **digest-match verification**, certificate signer/issuer.
 - `scripts/gen_bom.py` — script used to generate the BOM (walks the extracted archive, hashes every file,
-  extracts embedded Authenticode PKCS#7 signatures via `pefile` + `openssl`).
+  and verifies each PE binary's Authenticode signature via `osslsigncode verify` — cryptographically
+  recomputing the PE digest and comparing it to the embedded signed digest, not just checking for a
+  certificate subject string).
 - `scripts/gen_report.py` — script used to generate the DOCX report from `bom.json`.
-- `scripts/extract_sig.py` — standalone Authenticode signature extraction/inspection utility.
+- `scripts/extract_sig.py` — lightweight standalone leaf-certificate-subject inspector (does not verify
+  the signature cryptographically; use `gen_bom.py`/`osslsigncode` for real verification).
 
 ## Key facts
 
@@ -31,7 +34,11 @@ See [`TSS_Security_Review.docx`](TSS_Security_Review.docx) for the full report.
 | Archive size | 37,178,473 bytes (~35.5 MB) |
 | Archive SHA-256 | see `bom.json` → `archive_sha256` |
 | Files in archive | 1,531 |
-| PE binaries | 115 (114 signed by Microsoft Corporation, 1 unsigned resource-only icon DLL — no code) |
+| PE binaries | 115 (114 signed by Microsoft Corporation with digest verified — 0 mismatches; 1 unsigned resource-only icon DLL — no code) |
+
+Chain-to-root / CRL / OCSP / timestamp-countersignature validation was not completed (no local Microsoft
+root CA trust store or Windows `signtool` in the review environment) — see the report's §3.4 for what that
+does and doesn't mean for the digest-match result.
 
 ## Note on the similar alias `aka.ms/gettts`
 
