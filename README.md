@@ -25,6 +25,12 @@ See [`TSS_Security_Review.docx`](TSS_Security_Review.docx) for the full report.
 - `scripts/gen_report.py` — script used to generate the DOCX report from `bom.json`.
 - `scripts/extract_sig.py` — lightweight standalone leaf-certificate-subject inspector (does not verify
   the signature cryptographically; use `gen_bom.py`/`osslsigncode` for real verification).
+- `tool_inventory.csv` / `tool_inventory_final.json` — complete per-binary inventory of all 115 PE files:
+  purpose and, where found, the exact file:line in TSS's own PowerShell scripts that invokes it. Generated
+  by `scripts/gen_tool_inventory.py` (grep-based evidence gathering across all 695 bundled `.ps1`/`.psm1`
+  files) and `scripts/gen_tool_table.py` (merges evidence with hand-authored purpose descriptions). Also
+  reproduced in full as section 7 of the DOCX report. See that section for caveats on false-positive
+  matches (short names like `du`/`kd`/`SAN`) and on confidence level for less-documented internal tools.
 
 ## Key facts
 

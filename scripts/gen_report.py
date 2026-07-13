@@ -5,6 +5,8 @@ import json, datetime
 
 with open("bom.json") as f:
     bom = json.load(f)
+with open("tool_inventory_final.json") as f:
+    tool_rows = json.load(f)
 
 doc = Document()
 
@@ -75,7 +77,8 @@ doc.add_paragraph(
     "(ADS, AUT, CRM, DND, INT, ITN, MCM, NET, PRF, SDP, SHA, SPS, UEX...), and BIN / BINx64 / BINx86 / "
     "BINARM directories bundling third-party diagnostic executables (Procmon, Sysmon, procdump, xperf, "
     "wpr, psping, rpcdump, rpccfg, WinHTTPDiag, poolmon, etc.), plus scripts/, config/, help/, xray/ and "
-    "psSDP/ support directories."
+    "psSDP/ support directories. A complete per-binary inventory of all 115 PE files — purpose and how "
+    "each is invoked by TSS's PowerShell layer, with file:line evidence — is provided in section 7."
 )
 
 doc.add_heading("3.3 Authenticode signature verification", level=2)
@@ -221,6 +224,44 @@ doc.add_paragraph(f"Archive SHA-256: {bom['archive_sha256']}")
 doc.add_paragraph(f"Total files in archive: {bom['file_count']}")
 doc.add_paragraph(f"PE binaries: {len(pe_rows)} (signed: {len(signed)}, unsigned: {len(unsigned)})")
 doc.add_paragraph("Full file-level Bill of Materials (path, size, SHA-256, signer) is provided in bom.csv / bom.json in the accompanying repository.")
+
+doc.add_heading("7. Bundled Tool Inventory (complete, all 115 PE binaries)", level=1)
+doc.add_paragraph(
+    "This is a complete, per-binary inventory of every PE file in the archive: what it is, and where/how "
+    "TSS's own PowerShell layer invokes it. Evidence was gathered by searching all 695 .ps1/.psm1 files in "
+    "the archive (not just the 19 top-level TSS_*.psm1 modules) for each binary's filename, and citing the "
+    "first matching file:line found. Two important caveats:"
+)
+for line in [
+    "Automated substring matching produces false positives on short/common names (e.g. \"du\", \"kd\", "
+    "\"SAN\", \"handle\" colliding with unrelated words in comments or encoded blobs). Those cases are "
+    "explicitly flagged below as unconfirmed rather than presented as verified instrumentation.",
+    "\"Purpose\" descriptions for well-known public Microsoft/Sysinternals/WDK tools (Procmon, Sysmon, "
+    "procdump, PsPing, AccessChk, etc.) draw on their established public documentation. For TSS-internal or "
+    "less-documented tools, purpose is stated only as far as the script context found actually supports — "
+    "entries marked \"not independently confirmed\" are inference from naming/bundling convention, not "
+    "verified fact.",
+]:
+    doc.add_paragraph(line, style="List Bullet")
+
+tool_table = doc.add_table(rows=1, cols=4)
+tool_table.style = "Light Grid Accent 1"
+th = tool_table.rows[0].cells
+th[0].text, th[1].text, th[2].text, th[3].text = "Path", "Signed / Digest OK", "Purpose", "Invocation evidence (file:line)"
+for r in tool_rows:
+    row = tool_table.add_row().cells
+    row[0].text = r["path"]
+    if r["signed"] is True and r["digest_match"] is True:
+        sig_status = "Yes / Yes"
+    elif r["signed"] is True and r["digest_match"] is False:
+        sig_status = "Yes / MISMATCH"
+    elif r["signed"] is False:
+        sig_status = "No (unsigned)"
+    else:
+        sig_status = "N/A"
+    row[1].text = sig_status
+    row[2].text = r["purpose"]
+    row[3].text = r["invocation_evidence"]
 
 doc.save("TSS_Security_Review.docx")
 print("saved TSS_Security_Review.docx")
