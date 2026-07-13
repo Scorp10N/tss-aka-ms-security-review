@@ -229,13 +229,26 @@ doc.add_heading("7. Bundled Tool Inventory (complete, all 115 PE binaries)", lev
 doc.add_paragraph(
     "This is a complete, per-binary inventory of every PE file in the archive: what it is, and where/how "
     "TSS's own PowerShell layer invokes it. Evidence was gathered by searching all 695 .ps1/.psm1 files in "
-    "the archive (not just the 19 top-level TSS_*.psm1 modules) for each binary's filename, and citing the "
-    "first matching file:line found. Two important caveats:"
+    "the archive (not just the 19 top-level TSS_*.psm1 modules) for each binary's filename, scoring "
+    "candidate matches (word-boundary match, non-comment line, presence of invocation syntax such as "
+    "Start-Process/.exe/cmd.exe) and citing the highest-scoring lines found — not simply the first matches "
+    "encountered. Important caveats:"
 )
 for line in [
-    "Automated substring matching produces false positives on short/common names (e.g. \"du\", \"kd\", "
-    "\"SAN\", \"handle\" colliding with unrelated words in comments or encoded blobs). Those cases are "
-    "explicitly flagged below as unconfirmed rather than presented as verified instrumentation.",
+    "An earlier version of this table selected the first 1-3 substring matches per binary without this "
+    "scoring, which produced two classes of error caught by independent critique (check #3, logged in "
+    "this repository's .devils-advocate/ directory): (a) a false NEGATIVE for handle.exe, where the first "
+    "matches found were unrelated GUI comments, causing a genuinely-invoked tool to be reported as "
+    "unconfirmed; and (b) misleading evidence lines for Pstat.exe/latte.exe, where a substring match inside "
+    "an unrelated word (\"pStat\" inside \"HttpStatusCode\", \"latte\" inside \"latter\") was cited as if it "
+    "were the real invocation. These entries have been corrected using the improved scoring method; the "
+    "corrections are noted inline in the affected purpose descriptions below.",
+    "Automated substring matching can still produce false positives on short/common names (e.g. \"du\", "
+    "\"kd\", \"tmq\" colliding with unrelated words, comments, or encoded blobs). Those remaining cases are "
+    "explicitly flagged below as unconfirmed rather than presented as verified instrumentation. One entry "
+    "(SAN.exe) has real corroborating evidence, but that evidence sits inside a commented-out ('dead') code "
+    "block rather than the active execution path — this is called out explicitly rather than treated as "
+    "either a clean confirmation or a false positive.",
     "\"Purpose\" descriptions for well-known public Microsoft/Sysinternals/WDK tools (Procmon, Sysmon, "
     "procdump, PsPing, AccessChk, etc.) draw on their established public documentation. For TSS-internal or "
     "less-documented tools, purpose is stated only as far as the script context found actually supports — "

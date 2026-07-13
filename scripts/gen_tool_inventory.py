@@ -13,17 +13,55 @@ for sf in script_files:
     with open(sf, "r", encoding="utf-8", errors="ignore") as fh:
         script_text[sf] = fh.readlines()
 
-def find_refs(basename_noext, max_refs=3):
-    pat = re.compile(re.escape(basename_noext), re.IGNORECASE)
-    refs = []
+INVOCATION_MARKERS = (
+    ".exe", ".dll", ".sys", "start-process", "-filepath", "cmd.exe", "& $", '& "',
+    "join-path", "| out-file", "get-command", "run-diagexpression", "commandname",
+    "test-path",
+)
+
+def is_comment(stripped):
+    return stripped.startswith("#") or stripped.startswith("::") or stripped.startswith("<#")
+
+def looks_like_encoded_blob(stripped):
+    # long line, no whitespace, mostly base64-ish charset -> likely an obfuscated/encoded blob
+    body = stripped.replace(" ", "")
+    if len(body) < 60:
+        return False
+    non_b64 = sum(1 for c in body if not re.match(r"[A-Za-z0-9+/=]", c))
+    return non_b64 / max(len(body), 1) < 0.05
+
+def score(line, matched_word_boundary):
+    stripped = line.strip()
+    s = 0
+    if matched_word_boundary:
+        s += 3
+    if not is_comment(stripped):
+        s += 2
+    if looks_like_encoded_blob(stripped):
+        s -= 5
+    low = stripped.lower()
+    if any(m in low for m in INVOCATION_MARKERS):
+        s += 2
+    return s
+
+def find_refs(basename_noext, max_refs=3, max_candidates=40):
+    # substring pattern (broad net) and word-boundary pattern (high-confidence signal)
+    sub_pat = re.compile(re.escape(basename_noext), re.IGNORECASE)
+    wb_pat = re.compile(r"(?<![A-Za-z0-9_])" + re.escape(basename_noext) + r"(?![A-Za-z0-9_])", re.IGNORECASE)
+    candidates = []
     for sf, lines in script_text.items():
         rel = os.path.relpath(sf, "extracted")
         for i, line in enumerate(lines, 1):
-            if pat.search(line):
-                refs.append(f"{rel}:{i}: {line.strip()[:160]}")
-                if len(refs) >= max_refs:
-                    return refs
-    return refs
+            if sub_pat.search(line):
+                wb = bool(wb_pat.search(line))
+                candidates.append((score(line, wb), rel, i, line.strip()[:160]))
+                if len(candidates) >= max_candidates:
+                    break
+        if len(candidates) >= max_candidates:
+            break
+    candidates.sort(key=lambda c: -c[0])
+    top = candidates[:max_refs]
+    return [f"{rel}:{i}: {text}" for _, rel, i, text in top]
 
 rows = []
 for r in pe:
