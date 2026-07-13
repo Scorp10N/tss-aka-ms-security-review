@@ -16,9 +16,11 @@ doc.add_heading("1. Executive Summary", level=1)
 doc.add_paragraph(
     "The short link https://aka.ms/gettss is a live, first-party Microsoft alias that 301-redirects to "
     "download.microsoft.com and delivers TSS.zip (~35.5 MB), the \"TroubleShootingScript\" (TSS / TSSv2) "
-    "diagnostic toolkit used by Microsoft Customer Support Services (CSS) engineers. This is a real, "
-    "publicly circulated Microsoft support tool, not malware, not a fake/typosquat, and not related to "
-    "text-to-speech or the unrelated microsoft/TSS.MSR (TPM stack) project."
+    "diagnostic toolkit used by Microsoft Customer Support Services (CSS) engineers. It is a real, publicly "
+    "circulated Microsoft support tool: a curated bundle of Sysinternals-class tracing and diagnostic "
+    "binaries (Procmon, Sysmon, procdump, xperf, wpr, packet capture, RPC enumeration) wrapped in "
+    "PowerShell modules that CSS engineers and administrators run to collect Windows troubleshooting data "
+    "for a support case."
 )
 doc.add_paragraph(
     "The archive bundles 1,531 files, including 115 native PE binaries (Sysinternals-class tools: Procmon, "

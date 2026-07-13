@@ -4,10 +4,11 @@ Security architecture review of the Microsoft short link `https://aka.ms/gettss`
 (TroubleShootingScript / TSSv2)** diagnostic toolkit used by Microsoft Customer Support Services (CSS)
 engineers.
 
-**Verdict:** legitimate, Authenticode-signed first-party Microsoft distribution. Not malware, not a
-typosquat, not related to text-to-speech or the unrelated `microsoft/TSS.MSR` (TPM stack) project. Primary
-residual risk is *capability* (a bundled high-privilege diagnostic/tracing kit is attractive for social
-engineering abuse), not authenticity.
+**Verdict:** a legitimate, Authenticode-signed first-party Microsoft distribution — a Microsoft
+CSS-support-engineer-authored bundle of Sysinternals-class diagnostic and tracing tools (Procmon, Sysmon,
+procdump, xperf, wpr, packet capture, RPC enumeration) wrapped in PowerShell modules for collecting
+Windows troubleshooting data. Primary residual risk is *capability*: a bundled high-privilege
+diagnostic/tracing kit is attractive for social-engineering abuse precisely because it's trusted and signed.
 
 See [`TSS_Security_Review.docx`](TSS_Security_Review.docx) for the full report.
 
