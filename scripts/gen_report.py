@@ -47,8 +47,6 @@ for line in [
     "Verified embedded Authenticode signatures on all 115 PE binaries via osslsigncode: recomputed each "
     "binary's PE digest and compared it to the digest embedded in the signature (proves the signed bytes "
     "match what's on disk) — not merely checking for the presence of a certificate subject string.",
-    "Searched GitHub for canonical upstream source / provenance and cross-referenced against the unrelated "
-    "microsoft/TSS.MSR (TPM stack) repository to rule out name-collision confusion.",
 ]:
     doc.add_paragraph(line, style="List Bullet")
 
@@ -193,21 +191,6 @@ doc.add_paragraph(
     "icon extraction. It is correctly identified as the single point in the archive with no cryptographic "
     "tamper-evidence, and should be treated as the artifact to re-verify by hash (SHA-256 recorded in the "
     "BOM) on any future download, rather than as an active code-execution risk under the current call site."
-)
-
-doc.add_heading("3.4 Provenance / upstream identity", level=2)
-doc.add_paragraph(
-    "No official microsoft/* GitHub repository hosts this toolkit under the TSS name; microsoft/TSS.MSR is "
-    "a separate, actively maintained Microsoft Research project implementing the TPM 2.0 software stack — "
-    "confirmed unrelated to this toolkit by description and content, not by release-history emptiness (that "
-    "repository is active). Multiple "
-    "independent community GitHub mirrors were found with matching file structure and identical internal "
-    "warning strings (e.g. rsessa/TSS, andreipintica/TSSV2), consistent with a tool that circulates "
-    "informally. The likely original author is Walter Eder, a Microsoft support/field engineer whose GitHub "
-    "Pages site is described as hosting 'Windows Tools (TSS, psTSS, psSDP)', matching this toolkit's module "
-    "naming (a psSDP directory is present in the archive). This is consistent with TSS's public reputation "
-    "as a Microsoft CSS-support-engineer-authored diagnostic toolkit distributed via aka.ms/getTSS, rather "
-    "than an official, centrally-supported Microsoft product."
 )
 
 doc.add_heading("4. Risk Assessment", level=1)
