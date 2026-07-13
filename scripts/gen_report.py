@@ -108,10 +108,29 @@ doc.add_paragraph(
     "Microsoft Code Signing PCA (2010/2011/2024) or Windows Production PCA intermediates. No evidence of "
     "spoofed, self-signed, or third-party-substituted certificates was found."
 )
+doc.add_heading("3.4.1 Unsigned PE finding", level=3)
+table_unsigned = doc.add_table(rows=1, cols=4)
+table_unsigned.style = "Light Grid Accent 1"
+hu = table_unsigned.rows[0].cells
+hu[0].text, hu[1].text, hu[2].text, hu[3].text = "Path", "Signed", "PE Sections", "Assessment"
+unsigned_row = by_path.get("config/GUI/tssGUI-icons.dll")
+ru = table_unsigned.add_row().cells
+ru[0].text = "config/GUI/tssGUI-icons.dll"
+ru[1].text = "No"
+ru[2].text = ".rdata, .rsrc (no .text/code section)"
+ru[3].text = "Resource-only icon library for the TSSGUI front-end; contains no executable code. " \
+             "Unsigned status is expected/normal for this file type and is not an indicator of tampering."
+if unsigned_row:
+    ru2 = table_unsigned.add_row().cells
+    ru2[0].text = "SHA-256"
+    ru2[1].text = ""
+    ru2[2].text = ""
+    ru2[3].text = unsigned_row["sha256"]
 doc.add_paragraph(
-    "The single unsigned PE file, config/GUI/tssGUI-icons.dll, was inspected: it contains only .rdata and "
-    ".rsrc sections (no .text/code section), i.e. it is a resource-only icon library for the GUI with no "
-    "executable code. This is a common, low-risk pattern and does not indicate tampering."
+    "This is the only unsigned PE binary out of 115 found in the archive (114/115 signed). It was manually "
+    "inspected and contains only .rdata and .rsrc sections — no .text/code section — confirming it is a "
+    "resource-only icon library for the GUI, not a functional executable or DLL. This is a common, "
+    "low-risk pattern and does not indicate tampering."
 )
 doc.add_paragraph(
     "Not verified in this review: full X.509 chain-of-trust / CRL / OCSP revocation status, and RFC3161 "
