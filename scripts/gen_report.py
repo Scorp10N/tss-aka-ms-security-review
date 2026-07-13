@@ -140,6 +140,42 @@ doc.add_paragraph(
     "an indicator of tampering."
 )
 
+doc.add_heading("3.4.2 Weak-link analysis: could the unsigned DLL compromise the solution?", level=3)
+doc.add_paragraph(
+    "Question examined: since config/GUI/tssGUI-icons.dll is the one unsigned PE in the archive, could it "
+    "serve as the weakest link and lead to compromise of the broader toolkit? Verified against the actual "
+    "call site in TSSGUI.ps1 rather than the file's properties alone."
+)
+doc.add_paragraph(
+    "TSSGUI.ps1 loads the file exclusively via a P/Invoke call to Shell32!ExtractIconEx (line ~230-249): "
+    "[System.IconExtractor]::Extract(\"$tssGuiPath\\config\\GUI\\tssGUI-icons.dll\", $i, $true). This is the "
+    "same Win32 API Windows Explorer uses to render file-type icons for arbitrary, untrusted files. It loads "
+    "the target strictly as an image resource (LOAD_LIBRARY_AS_IMAGE_RESOURCE semantics) and does not invoke "
+    "DllMain or execute any code the file might contain — consistent with the file having no .text "
+    "section to execute in the first place. The path is also hardcoded/explicit rather than resolved via "
+    "DLL search order, so classic DLL search-order hijacking does not apply."
+)
+table_weak = doc.add_table(rows=1, cols=2)
+table_weak.style = "Light Grid Accent 1"
+hw = table_weak.rows[0].cells
+hw[0].text, hw[1].text = "Angle", "Verdict"
+weak_rows = [
+    ("Code execution via current call site", "No — icon extraction does not execute module code by design; this is why icon previews are considered safe for untrusted files."),
+    ("Integrity / tamper-detection", "Yes, this is the real gap: it is the only file in the archive where Authenticode/WDAC give no cryptographic assurance the bytes are unmodified. Every other binary would fail signature validation if swapped; this one would not."),
+    ("Resource-parser exploitation", "Narrow, non-zero, OS-side surface: Windows icon/cursor resource parsers have had historical memory-corruption CVEs (e.g., animated-cursor-class bugs). A maliciously crafted icon resource could theoretically exploit an unpatched parser bug, independent of the DLL's own code."),
+    ("Future-proofing / design fragility", "If a future version or a different script loads this same filename via a normal LoadLibrary/Add-Type instead of ExtractIconEx, any embedded code would then execute. No current code path does this, but an unsigned file in the tree is one careless change away from becoming a real execution path."),
+    ("AppLocker/WDAC bypass angle", "Most signed-binary allow-list policies enforce on EXE launch, not DLL load, by default (DLL rule enforcement is off by default for performance reasons). This DLL would load without friction even under a signed-only policy — not because of exploitation, but because the control does not inspect it."),
+]
+for a, b in weak_rows:
+    row = table_weak.add_row().cells
+    row[0].text, row[1].text = a, b
+doc.add_paragraph(
+    "Conclusion: not a live path to full-solution compromise today, given its actual usage is resource-only "
+    "icon extraction. It is correctly identified as the single point in the archive with no cryptographic "
+    "tamper-evidence, and should be treated as the artifact to re-verify by hash (SHA-256 recorded in the "
+    "BOM) on any future download, rather than as an active code-execution risk under the current call site."
+)
+
 doc.add_heading("3.5 Provenance / upstream identity", level=2)
 doc.add_paragraph(
     "No official microsoft/* GitHub repository hosts this toolkit under the TSS name; microsoft/TSS.MSR is "
