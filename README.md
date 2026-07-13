@@ -38,7 +38,7 @@ See [`TSS_Security_Review.docx`](TSS_Security_Review.docx) for the full report.
 | PE binaries | 115 (114 signed by Microsoft Corporation with digest verified — 0 mismatches; 1 unsigned resource-only icon DLL — no code) |
 
 Chain-to-root / CRL / OCSP / timestamp-countersignature validation was not completed (no local Microsoft
-root CA trust store or Windows `signtool` in the review environment) — see the report's §3.4 for what that
+root CA trust store or Windows `signtool` in the review environment) — see the report's §3.3 for what that
 does and doesn't mean for the digest-match result.
 
 ## What is intentionally NOT included in this repo

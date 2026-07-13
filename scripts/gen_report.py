@@ -28,7 +28,7 @@ doc.add_paragraph(
     "tracing, packet capture, and log collection across many Windows subsystems. 114 of 115 PE binaries "
     "carry Microsoft Authenticode signatures; for all 114, the PE digest was cryptographically recomputed "
     "and confirmed to match the embedded signed digest (zero mismatches — no evidence of tampering). "
-    "Full chain-to-root validation was not completed (see 3.4). The one unsigned PE is a resource-only "
+    "Full chain-to-root validation was not completed (see 3.3). The one unsigned PE is a resource-only "
     "icon DLL with no executable code, which is normal and low-risk."
 )
 doc.add_paragraph(
