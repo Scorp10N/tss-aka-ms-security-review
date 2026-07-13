@@ -69,16 +69,7 @@ for k, v in rows_311:
     row = table.add_row().cells
     row[0].text, row[1].text = k, v
 
-doc.add_heading("3.2 Related alias: aka.ms/gettts", level=2)
-doc.add_paragraph(
-    "The visually similar alias aka.ms/gettts (double-t, TTS not TSS) is currently UNREGISTERED. It falls "
-    "back to Bing (Location: https://www.bing.com?ref=aka&shorturl=gettts), which is aka.ms's standard "
-    "behavior for a dead/unclaimed alias. This is a dangling-link risk: nothing prevents someone from "
-    "registering it in the future and redirecting it elsewhere while it still displays as a trusted "
-    "aka.ms domain."
-)
-
-doc.add_heading("3.3 Archive contents overview", level=2)
+doc.add_heading("3.2 Archive contents overview", level=2)
 doc.add_paragraph(
     "Top-level structure: TSS.ps1 / TSSGUI.ps1 (main entry points), 19 TSS_*.psm1 feature modules "
     "(ADS, AUT, CRM, DND, INT, ITN, MCM, NET, PRF, SDP, SHA, SPS, UEX...), and BIN / BINx64 / BINx86 / "
@@ -87,7 +78,7 @@ doc.add_paragraph(
     "psSDP/ support directories."
 )
 
-doc.add_heading("3.4 Authenticode signature verification", level=2)
+doc.add_heading("3.3 Authenticode signature verification", level=2)
 pe_rows = [r for r in bom["files"] if r.get("is_pe")]
 signed = [r for r in pe_rows if r.get("signed")]
 unsigned = [r for r in pe_rows if not r.get("signed")]
@@ -135,7 +126,7 @@ doc.add_paragraph(
     "not a finding about the binaries themselves. The digest-match result above is independent of this "
     "limitation and stands on its own as integrity evidence."
 )
-doc.add_heading("3.4.1 Unsigned PE finding", level=3)
+doc.add_heading("3.3.1 Unsigned PE finding", level=3)
 table_unsigned = doc.add_table(rows=1, cols=4)
 table_unsigned.style = "Light Grid Accent 1"
 hu = table_unsigned.rows[0].cells
@@ -166,7 +157,7 @@ doc.add_paragraph(
     "timestamp countersignature and is not itself an indicator of tampering."
 )
 
-doc.add_heading("3.4.2 Weak-link analysis: could the unsigned DLL compromise the solution?", level=3)
+doc.add_heading("3.3.2 Weak-link analysis: could the unsigned DLL compromise the solution?", level=3)
 doc.add_paragraph(
     "Question examined: since config/GUI/tssGUI-icons.dll is the one unsigned PE in the archive, could it "
     "serve as the weakest link and lead to compromise of the broader toolkit? Verified against the actual "
@@ -202,7 +193,7 @@ doc.add_paragraph(
     "BOM) on any future download, rather than as an active code-execution risk under the current call site."
 )
 
-doc.add_heading("3.5 Provenance / upstream identity", level=2)
+doc.add_heading("3.4 Provenance / upstream identity", level=2)
 doc.add_paragraph(
     "No official microsoft/* GitHub repository hosts this toolkit under the TSS name; microsoft/TSS.MSR is "
     "a separate, actively maintained Microsoft Research project implementing the TPM 2.0 software stack — "
@@ -224,7 +215,6 @@ h3 = table3.rows[0].cells
 h3[0].text, h3[1].text, h3[2].text = "Risk", "Rating", "Rationale"
 risks = [
     ("Malicious/tampered download", "Low", "First-party host, valid Microsoft signatures on all functional binaries, ZIP integrity confirmed."),
-    ("Dangling-alias hijack (gettts)", "Medium (latent)", "Unregistered aka.ms alias could be claimed and repointed later while retaining implicit trust of the aka.ms domain."),
     ("Capability abuse if misdelivered", "Medium-High (contextual)", "Bundles kernel ETW tracing, process dumping, and packet capture tools; valuable to an attacker via pretext/social engineering precisely because binaries are trusted and signed."),
     ("Supply-chain provenance", "Low-Medium", "No single canonical public source repo identified; distribution relies on community mirrors and an internal Microsoft alias rather than a versioned, auditable release channel."),
 ]
@@ -236,7 +226,6 @@ doc.add_heading("5. Recommendations", level=1)
 for line in [
     "Restrict deployment/execution of the TSS toolkit to authorized admin/support workstations under change control; treat it as a high-privilege diagnostic kit, not a general utility.",
     "Pin and verify the archive SHA-256 (recorded in this report and the accompanying BOM) for any future re-download, rather than trusting the aka.ms redirect blindly each time.",
-    "Do not register or repurpose the aka.ms/gettts alias path in any internal documentation; treat any link claiming to be a TTS tool at that address as unverified until re-checked.",
     "If TSS output/traces are received from an unsolicited or unverified source, apply the same scrutiny as any unverified executable bundle, despite the presence of valid Microsoft signatures.",
     "For a stronger provenance guarantee, obtain TSS through Microsoft Support/CSS engagement channels or Microsoft Learn documentation referencing it, rather than via a bare short link.",
 ]:

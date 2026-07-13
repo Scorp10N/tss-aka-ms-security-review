@@ -40,12 +40,6 @@ Chain-to-root / CRL / OCSP / timestamp-countersignature validation was not compl
 root CA trust store or Windows `signtool` in the review environment) — see the report's §3.4 for what that
 does and doesn't mean for the digest-match result.
 
-## Note on the similar alias `aka.ms/gettts`
-
-`aka.ms/gettts` (double-T, TTS not TSS) is **currently unregistered** and falls back to Bing
-(`aka.ms`'s standard dead-alias behavior). This is a latent dangling-link risk: nothing prevents future
-registration and repointing while the domain still reads as trusted `aka.ms`.
-
 ## What is intentionally NOT included in this repo
 
 The actual `TSS.zip` archive and its extracted binaries are **not republished here** — they are Microsoft's
