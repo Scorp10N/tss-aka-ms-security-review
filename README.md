@@ -45,7 +45,7 @@ See [`TSS_Security_Review.docx`](TSS_Security_Review.docx) for the full report.
 | Archive SHA-256 | see `bom.json` → `archive_sha256` |
 | Files in archive | 1,531 |
 | PE binaries | 115 (114 signed by Microsoft Corporation, digest verified — 0 mismatches; 1 unsigned resource-only icon DLL — no code) |
-| Chain-to-root verification | 114/114 signed binaries pass full chain-to-root + RFC3161 timestamp + CRL revocation checking — 0 failures |
+| Chain-to-root verification | 113/114 signed binaries pass full chain-to-root + RFC3161 timestamp + CRL revocation checking against a public Microsoft root. The remaining 1 (`SQLCheck.exe`) is signed with Microsoft's *internal-only* corporate PKI rather than the public code-signing chain — see report §3.3.3. |
 
 Chain-to-root/CRL/timestamp validation initially required a local Microsoft root CA trust store, which
 this review's environment didn't have — that gap has since been closed (see `ms-roots/README.md`). OCSP

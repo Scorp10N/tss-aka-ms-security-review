@@ -59,7 +59,7 @@
     "path": "BIN/SQLCheck.exe",
     "signed": true,
     "digest_match": true,
-    "purpose": "SQL Server connectivity/health check tool, gated behind the NET_SQLcheck switch and also invoked from the psSDP SQL base diagnostics script.",
+    "purpose": "SQL Server connectivity/health check tool, gated behind the NET_SQLcheck switch and also invoked from the psSDP SQL base diagnostics script. Notable outlier: its Authenticode signature is issued by 'MSIT CA Z1', chaining to 'Microsoft Internal Corporate Root' \u2014 Microsoft's internal-only corporate PKI (the leaf cert's own CN is literally 'Microsoft Corporation (Internal Use Only)') \u2014 not the public Code Signing PCA chain every other signed binary in this archive uses. PE digest still matches (no tampering), but this signature cannot be chain-verified against a public root by design, since that root is never published outside Microsoft's internal network. Likely an internal-tooling artifact that made it into a public distribution rather than anything malicious, but it is the one binary in the archive an external party fundamentally cannot chain-verify to a trusted root.",
     "invocation_evidence": "TSS_NET.psm1:4323: LogInfo \"[$($MyInvocation.MyCommand.Name)] running 'SQL Connectivity Settings Check' (SQLcheck.exe)\""
   },
   {

@@ -55,10 +55,24 @@ def osslsigncode_info(path):
         info["signer"] = m.group(1).strip()
         info["issuer"] = m.group(2).strip()
 
-    if "Signature verification: ok" in out or "Signature verification: succeeded" in out:
-        info["chain_verified"] = True
-    elif "Signature verification: failed" in out:
-        info["chain_verified"] = False
+    # osslsigncode prints multiple "...verification: ok/failed" lines (e.g. "Timestamp
+    # Server Signature verification: ok" for the TSA chain) in addition to the overall
+    # verdict. Matching "Signature verification: ok" as a bare substring anywhere in
+    # stdout can match the TSA sub-check's line even when the overall verdict later in
+    # the output is "failed" — check #6's critique proved this via fault injection
+    # (a broken CA file still reported chain_verified=True). Anchor to the specific
+    # unprefixed "Signature verification: <verdict>" line, and require it to agree
+    # with the exit code / final "Succeeded"/"Failed" line as a second signal.
+    verdict_match = re.search(r"(?m)^Signature verification: (ok|succeeded|failed)$", out, re.IGNORECASE)
+    final_line = out.strip().splitlines()[-1].strip() if out.strip() else ""
+    if verdict_match:
+        verdict_ok = verdict_match.group(1).lower() in ("ok", "succeeded")
+        final_ok = final_line.lower() in ("succeeded",)
+        final_bad = final_line.lower() in ("failed",)
+        if verdict_ok and (final_ok or (not final_bad and result.returncode == 0)):
+            info["chain_verified"] = True
+        elif not verdict_ok or final_bad or result.returncode != 0:
+            info["chain_verified"] = False
 
     return info
 
@@ -85,9 +99,16 @@ with open(OUT_JSON, "w") as f:
         "archive_sha256": sha256("TSS.zip"),
         "file_count": len(rows),
         "verification_method": "osslsigncode verify (PE digest recomputed and compared to embedded signed "
-                                "digest = digest_match; full chain-to-root verification = chain_verified, "
-                                "requires local Microsoft root CA trust store which was not configured, so "
-                                "chain_verified is expected to read false/failed even for genuine binaries)",
+                                "digest = digest_match). chain_verified = full chain-to-root verification "
+                                "against Microsoft's real root/intermediate CA certs (ms-roots/*.pem, fetched "
+                                "from the AIA URLs embedded in the binaries' own certificates — see "
+                                "ms-roots/README.md), plus RFC3161 timestamp countersignature validation "
+                                "(-TSA-CAfile) and live CRL revocation checking against Microsoft's CRL "
+                                "distribution points. Verdict is parsed from osslsigncode's line-anchored "
+                                "'Signature verification: <ok|failed>' line plus its final Succeeded/Failed "
+                                "line and exit code, not a bare substring match (see gen_bom.py comments — "
+                                "an earlier version could misread the TSA sub-check's own 'verification: ok' "
+                                "line as the overall verdict; fixed after independent critique, check #6).",
         "files": rows,
     }, f, indent=2)
 

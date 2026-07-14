@@ -4,7 +4,7 @@
   "resolved_url": "https://download.microsoft.com/download/53c578ea-5649-4fdb-b949-0529ebb643ab/TSS.zip",
   "archive_sha256": "c9c35d27fe10eca06da2227111392fb8f7489098984248889cae77e1496487bd",
   "file_count": 1531,
-  "verification_method": "osslsigncode verify (PE digest recomputed and compared to embedded signed digest = digest_match; full chain-to-root verification = chain_verified, requires local Microsoft root CA trust store which was not configured, so chain_verified is expected to read false/failed even for genuine binaries)",
+  "verification_method": "osslsigncode verify (PE digest recomputed and compared to embedded signed digest = digest_match). chain_verified = full chain-to-root verification against Microsoft's real root/intermediate CA certs (ms-roots/*.pem, fetched from the AIA URLs embedded in the binaries' own certificates \u2014 see ms-roots/README.md), plus RFC3161 timestamp countersignature validation (-TSA-CAfile) and live CRL revocation checking against Microsoft's CRL distribution points. Verdict is parsed from osslsigncode's line-anchored 'Signature verification: <ok|failed>' line plus its final Succeeded/Failed line and exit code, not a bare substring match (see gen_bom.py comments \u2014 an earlier version could misread the TSA sub-check's own 'verification: ok' line as the overall verdict; fixed after independent critique, check #6).",
   "files": [
     {
       "path": "BIN/AgentConfigManagerLib.dll",
@@ -110,7 +110,7 @@
       "is_pe": true,
       "signed": true,
       "digest_match": true,
-      "chain_verified": true,
+      "chain_verified": false,
       "signer": "CN=Microsoft Corporation (Internal Use Only),O=Microsoft Corporation,L=Redmond,ST=Washington,C=US",
       "issuer": "CN=MSIT CA Z1"
     },

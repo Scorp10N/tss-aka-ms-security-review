@@ -29,10 +29,12 @@ doc.add_paragraph(
     "Sysmon, procdump, xperf, wpr, psping, rpcdump, rpccfg, etc.) alongside PowerShell modules for ETW "
     "tracing, packet capture, and log collection across many Windows subsystems. 114 of 115 PE binaries "
     "carry Microsoft Authenticode signatures; for all 114, the PE digest was cryptographically recomputed "
-    "and confirmed to match the embedded signed digest (zero mismatches — no evidence of tampering), AND "
-    "the full certificate chain was independently verified to a trusted Microsoft root CA, including the "
-    "RFC3161 timestamp countersignature (see 3.3) — zero chain failures. The one unsigned PE is a "
-    "resource-only icon DLL with no executable code, which is normal and low-risk."
+    "and confirmed to match the embedded signed digest (zero mismatches — no evidence of tampering). Of "
+    "those 114, 113 chain-verify to a trusted public Microsoft root CA including the RFC3161 timestamp "
+    "countersignature (see 3.3); one (SQLCheck.exe) is signed with Microsoft's internal-only corporate PKI "
+    "rather than the public code-signing chain, so it cannot be chain-verified against a public root by "
+    "design — its digest still matches, but this is flagged as a notable outlier (see 3.3.3). The one "
+    "unsigned PE is a resource-only icon DLL with no executable code, which is normal and low-risk."
 )
 doc.add_paragraph(
     "Primary risk is CAPABILITY, not AUTHENTICITY: this is a legitimately signed, high-privilege diagnostic "
@@ -125,8 +127,7 @@ for s in samples:
         row[3].text = "Yes" if r.get("chain_verified") else str(r.get("chain_verified"))
 
 doc.add_paragraph(
-    f"All {len(signed)} signed binaries carry Microsoft Corporation leaf certificates issued under "
-    "Microsoft Code Signing PCA (2010/2011/2024) or Windows Production PCA intermediates, and all "
+    f"All {len(signed)} signed binaries carry Microsoft Corporation leaf certificates, and all "
     f"{len(digest_ok)} of them passed digest verification (0 mismatches). No evidence of tampering, "
     "spoofed, self-signed, or third-party-substituted certificates was found."
 )
@@ -136,11 +137,13 @@ doc.add_paragraph(
     "(PCA) certificates were identified from the Authority Information Access (AIA) 'CA Issuers' URL "
     "embedded in the binaries' own certificates (not guessed or fetched from an unrelated source), and "
     "verification was re-run with the full chain plus the RFC3161 timestamp countersignature validated "
-    f"against those same roots (Microsoft's own timestamp authority chains to them). Result: all {len(chain_ok)} "
-    f"of {len(signed)} signed binaries pass full chain-to-root verification, with 0 chain failures. "
-    "Provenance of each certificate (exact AIA URL, subject) is recorded in ms-roots/README.md in the "
-    "accompanying repository, and the certificates themselves (ms-roots/*.pem) are included so this is "
-    "independently re-checkable without re-fetching from Microsoft."
+    f"against those same roots (Microsoft's own timestamp authority chains to them). Result: {len(chain_ok)} "
+    f"of {len(signed)} signed binaries pass full chain-to-root verification against a trusted public "
+    f"Microsoft root. The remaining {len(chain_bad)} (SQLCheck.exe) is signed with a different, "
+    "internal-only Microsoft PKI chain that cannot be verified against a public root by design — see "
+    "3.3.3. Provenance of each certificate (exact AIA URL, subject) is recorded in ms-roots/README.md in "
+    "the accompanying repository, and the certificates themselves (ms-roots/*.pem) are included so this "
+    "is independently re-checkable without re-fetching from Microsoft."
 )
 doc.add_heading("3.3.1 Unsigned PE finding", level=3)
 table_unsigned = doc.add_table(rows=1, cols=4)
@@ -211,6 +214,48 @@ doc.add_paragraph(
     "icon extraction. It is correctly identified as the single point in the archive with no cryptographic "
     "tamper-evidence, and should be treated as the artifact to re-verify by hash (SHA-256 recorded in the "
     "BOM) on any future download, rather than as an active code-execution risk under the current call site."
+)
+
+doc.add_heading("3.3.3 SQLCheck.exe: internal-only Microsoft certificate", level=3)
+doc.add_paragraph(
+    "One binary, BIN/SQLCheck.exe, is a notable outlier among the 114 signed PE files. Its digest matches "
+    "(no tampering), but its certificate chain is entirely different from every other signed binary in the "
+    "archive:"
+)
+sql_row = by_path.get("BIN/SQLCheck.exe", {})
+table_sql = doc.add_table(rows=1, cols=2)
+table_sql.style = "Light Grid Accent 1"
+hs = table_sql.rows[0].cells
+hs[0].text, hs[1].text = "Property", "Value"
+sql_facts = [
+    ("Leaf certificate subject", sql_row.get("signer") or "CN=Microsoft Corporation (Internal Use Only), O=Microsoft Corporation, L=Redmond, ST=Washington, C=US"),
+    ("Issuer", sql_row.get("issuer") or "CN=MSIT CA Z1"),
+    ("Root", "CN=Microsoft Internal Corporate Root (not a public root — not present in ms-roots/, not published outside Microsoft's internal network)"),
+    ("Digest match", "Yes — file integrity confirmed, no tampering"),
+    ("Chain-to-root verified", "No — cannot be, by design: the issuing root is Microsoft's internal corporate PKI, never published for external validation"),
+]
+for k, v in sql_facts:
+    row = table_sql.add_row().cells
+    row[0].text, row[1].text = k, v
+doc.add_paragraph(
+    "Every other signed binary in the archive (113 of 114) is signed under Microsoft's public code-signing "
+    "PKI (Code Signing PCA 2010/2011/2024 or Windows Production PCA 2011), the same infrastructure used to "
+    "sign publicly-distributed Windows components and Sysinternals tools. SQLCheck.exe instead carries a "
+    "certificate whose own Common Name is literally 'Microsoft Corporation (Internal Use Only)', issued by "
+    "an internal certificate authority ('MSIT CA Z1') that chains to Microsoft's internal corporate root, "
+    "not a public one. This was only discovered because an independent code-review pass (see "
+    ".devils-advocate/ check #6 in the accompanying repository) caught a parsing bug in an earlier version "
+    "of this verification script that was silently misreporting this binary's chain status as verified; "
+    "fixing that parsing bug surfaced this finding."
+)
+doc.add_paragraph(
+    "Assessment: most likely an internal Microsoft support/build tool that was bundled into this "
+    "publicly-distributed diagnostic toolkit without being re-signed under the public code-signing "
+    "pipeline used for the rest of the archive — an operational-hygiene lapse rather than evidence of "
+    "tampering (the digest still matches its own signature). It is not independently verifiable against a "
+    "public trust root by any third party, which is a meaningfully different assurance level than the "
+    "other 113 signed binaries in this archive, and is worth being aware of if this specific binary is "
+    "relied upon."
 )
 
 doc.add_heading("4. Risk Assessment", level=1)
