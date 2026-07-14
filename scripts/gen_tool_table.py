@@ -2,18 +2,28 @@ import json, csv, sys
 sys.path.insert(0, ".")
 from tool_purposes import PURPOSES
 
-# Manual overrides for cases where the automated scorer still can't surface the
-# correct line — typically because the basename is an extremely common English
-# substring (e.g. "SAN" also matches "instance", "constant", etc.) so the
-# candidate cap fills with noise before reaching the real reference. Verified
-# by direct manual grep; see the corresponding purpose text for the citation.
+# Manual overrides for cases where the automated scorer's top-ranked candidate is
+# still not the most informative line to show — e.g. a genuine reference to the
+# binary ties in score against unrelated same-word collisions (SAN.exe: the real
+# "SAN.exe" reference ties against "san" the DiskPart command and "SAN" the X.509
+# Subject Alternative Name field), or the tie-break happens to land on a
+# comment-fragment sibling line rather than the clean active-code line right next
+# to it (cdb.exe: line 53 is a commented-out remnant, line 54 immediately below it
+# is the real active reference). Verified by direct manual grep; see the
+# corresponding purpose text for the citation.
 MANUAL_EVIDENCE_OVERRIDES = {
     "psSDP/Diag/global/SAN.exe": (
         "DC_SanStorageInfo.ps1:16: $CommandToExecute = \"cmd.exe /c SAN.exe $CommandToAdd\" "
         "[inside a commented-out <# ... #> block under '#region Old Code' — legacy/dead code, "
-        "not the active execution path; automated scorer could not surface this line because "
-        "\"SAN\" is too common a substring across the 695 scripts for the 40-candidate cap to "
-        "reach it — manually verified instead]"
+        "not the active execution path; the automated scorer ranks this line no higher than "
+        "unrelated same-word collisions elsewhere (the DiskPart \"san\" command, the X.509 "
+        "\"SAN\" field) — manually verified and selected instead]"
+    ),
+    "psSDP/Diag/global/cdb.exe": (
+        "TS_DumpCollector.ps1:54: $ScriptArguments += \"/cdbpath:$Global:ToolsPath\\cdb.exe /debuginfo\" "
+        "[active code, passed as a debug-info-collection argument; the automated scorer ties this "
+        "line with the commented-out remnant immediately above it (line 53) and the stable sort "
+        "displays the comment fragment first — manually selected the active line instead]"
     ),
 }
 

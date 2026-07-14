@@ -236,19 +236,25 @@ doc.add_paragraph(
 )
 for line in [
     "An earlier version of this table selected the first 1-3 substring matches per binary without this "
-    "scoring, which produced two classes of error caught by independent critique (check #3, logged in "
-    "this repository's .devils-advocate/ directory): (a) a false NEGATIVE for handle.exe, where the first "
-    "matches found were unrelated GUI comments, causing a genuinely-invoked tool to be reported as "
-    "unconfirmed; and (b) misleading evidence lines for Pstat.exe/latte.exe, where a substring match inside "
-    "an unrelated word (\"pStat\" inside \"HttpStatusCode\", \"latte\" inside \"latter\") was cited as if it "
-    "were the real invocation. These entries have been corrected using the improved scoring method; the "
-    "corrections are noted inline in the affected purpose descriptions below.",
-    "Automated substring matching can still produce false positives on short/common names (e.g. \"du\", "
-    "\"kd\", \"tmq\" colliding with unrelated words, comments, or encoded blobs). Those remaining cases are "
-    "explicitly flagged below as unconfirmed rather than presented as verified instrumentation. One entry "
-    "(SAN.exe) has real corroborating evidence, but that evidence sits inside a commented-out ('dead') code "
-    "block rather than the active execution path — this is called out explicitly rather than treated as "
-    "either a clean confirmation or a false positive.",
+    "scoring, which produced a false NEGATIVE for handle.exe (the first matches found were unrelated GUI "
+    "comments, so a genuinely-invoked tool was reported as unconfirmed) and misleading evidence lines for "
+    "Pstat.exe/latte.exe (a substring match inside an unrelated word — \"pStat\" inside \"HttpStatusCode\", "
+    "\"latte\" inside \"latter\" — was cited as if it were the real invocation). That fix (check #3) turned "
+    "out to be incomplete: it corrected the specific entries found but not the root cause, which was that "
+    "candidate collection was capped at 40 matches *before* scoring — so any basename common enough to "
+    "produce more than 40 incidental substring hits (e.g. \"du\", \"tmq\") could still have its real, active "
+    "invocation line invisible to the scorer, and in both cases the entry was then wrongly written up as a "
+    "confirmed false positive. Independent critique (check #4) caught this. The cap has since been removed "
+    "entirely — every substring match across all 695 scripts is now scored, not just the first 40 — and the "
+    "du.exe, tmq.exe, and cdb.exe purpose descriptions below have been corrected to their actual (active, "
+    "confirmed) invocations. Full history in this repository's .devils-advocate/ directory.",
+    "Automated substring matching can still produce false positives on short/common names (e.g. \"kd\" "
+    "colliding with \"kdbgctrl\"/\"chkdsk\"). Those remaining cases are explicitly flagged below as "
+    "unconfirmed rather than presented as verified instrumentation. Two entries (SAN.exe, cdb.exe) needed a "
+    "manually-verified evidence override because the automated scorer ties a genuine reference against "
+    "unrelated same-word collisions or an adjacent comment-fragment sibling line — SAN.exe's real reference "
+    "additionally sits inside a commented-out ('dead') code block rather than the active execution path, "
+    "which is called out explicitly rather than treated as either a clean confirmation or a false positive.",
     "\"Purpose\" descriptions for well-known public Microsoft/Sysinternals/WDK tools (Procmon, Sysmon, "
     "procdump, PsPing, AccessChk, etc.) draw on their established public documentation. For TSS-internal or "
     "less-documented tools, purpose is stated only as far as the script context found actually supports — "

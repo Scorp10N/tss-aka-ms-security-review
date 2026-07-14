@@ -18,7 +18,7 @@
     "signed": true,
     "digest_match": true,
     "purpose": "Sysinternals Coreinfo \u2014 dumps CPU topology, cache, and supported instruction-set features. TSS checks for its presence via Get-Command before use.",
-    "invocation_evidence": "TSS.ps1:6810: $CoreInfoCommand = Get-Command \"CoreInfo.exe\" -ErrorAction Ignore"
+    "invocation_evidence": "TSS_SHA.psm1:2800: \"$global:ScriptFolder\\BIN\\Coreinfo.exe -accepteula | Out-File ${LogFolder}\\${Env:COMPUTERNAME}_coreinfo.txt\","
   },
   {
     "path": "BIN/DatabaseAnalyzer.exe",
@@ -53,28 +53,28 @@
     "signed": true,
     "digest_match": true,
     "purpose": "Sysinternals Process Monitor \u2014 real-time file system/registry/process/thread activity monitor; started and stopped via Start-Process with dynamically built argument lists (see prior conversation turn for exact invocation lines).",
-    "invocation_evidence": "TSSGUI.ps1:1935: if ($line -match '^ProcMon|^WPR|^PSR|^Netsh|^Video|^Perf|^Xperf|^CommonTask|^RASdiag|^WFPdiag|^PktMon') {  # Check if line starts with \"ProcMon\""
+    "invocation_evidence": "TSS_NET.psm1:1658: \"NET_Proxy\"      = \"PSR,SDP,Video,ProcMon, AfdTcpFull,NCSI,NDIS,WebIO,WinInet,WinHTTP,Winsock ETL log(s), Proxy settings and related Registry settings, Netsh sc"
   },
   {
     "path": "BIN/SQLCheck.exe",
     "signed": true,
     "digest_match": true,
     "purpose": "SQL Server connectivity/health check tool, gated behind the NET_SQLcheck switch and also invoked from the psSDP SQL base diagnostics script.",
-    "invocation_evidence": "psSDP/Diag/global/DC_SQLcheck.ps1:19: $CommandToExecute = \"cmd.exe /c SQLcheck.exe >> $OutputFile\""
+    "invocation_evidence": "TSS_SDP.psm1:10863: $ExePath = (Get-Command SQLCheck.exe -ErrorAction Stop).Source"
   },
   {
     "path": "BIN/Showpriv.exe",
     "signed": true,
     "digest_match": true,
     "purpose": "Displays the effective Windows privileges held by the current token (e.g. SeTakeOwnershipPrivilege); invoked by the psSDP user-rights diagnostic script.",
-    "invocation_evidence": "psSDP/Diag/global/DC_UserRights.ps1:19: 'Skipping running {showpriv.exe} since it is not supported in ' + $OSArchitecture + ' architecture.' | WriteTo-StdOut"
+    "invocation_evidence": "TSS_SDP.psm1:2398: \"$global:ScriptFolder\\BIN\\showpriv.exe SeTakeOwnershipPrivilege | Out-File -Append $outFile\""
   },
   {
     "path": "BIN/Sysmon.exe",
     "signed": true,
     "digest_match": true,
     "purpose": "Sysinternals System Monitor \u2014 kernel-driver-based ETW logger for detailed process creation, network connection, and file-change events; one of the trace types named in TSS's own synopsis.",
-    "invocation_evidence": "TSS.ps1:21310: If($Null -eq $RegValues.SysMon){"
+    "invocation_evidence": "TSS.ps1:21303: If($global:BoundParameters.ContainsKey('SysMon')){"
   },
   {
     "path": "BIN/VmlTrace.exe",
@@ -95,7 +95,7 @@
     "signed": true,
     "digest_match": true,
     "purpose": "WinHTTP configuration/proxy diagnostic tool, invoked with -i to dump WinHTTP settings as part of the NET_Proxy network trace scenario.",
-    "invocation_evidence": "TSS.ps1:6114: \"WinHTTPDiag.exe -i | Out-File -Append $outFile\""
+    "invocation_evidence": "TSS_NET.psm1:1658: \"NET_Proxy\"      = \"PSR,SDP,Video,ProcMon, AfdTcpFull,NCSI,NDIS,WebIO,WinInet,WinHTTP,Winsock ETL log(s), Proxy settings and related Registry settings, Netsh sc"
   },
   {
     "path": "BIN/accesschk.exe",
@@ -123,14 +123,14 @@
     "signed": true,
     "digest_match": true,
     "purpose": "Microsoft Device Console (from the WDK) \u2014 enumerates and manages devices/drivers; invoked by a psSDP setup diagnostics script.",
-    "invocation_evidence": "psSDP/Diag/global/DC_Devcon.ps1:34: 'Skipping running {devcon.exe} since it is not supported in ' + $OSArchitecture + ' architecture.' | WriteTo-StdOut"
+    "invocation_evidence": "TSS_SDP.psm1:4507: $OutFile = \"$global:SDPFolder\\$($global:LogPrefix)Devcon.TXT\""
   },
   {
     "path": "BIN/diskspd.exe",
     "signed": true,
     "digest_match": true,
     "purpose": "Microsoft DiskSpd \u2014 storage I/O performance benchmarking tool; used to generate synthetic load for SMB performance test scenarios.",
-    "invocation_evidence": "TSS.ps1:30553: $CommandLine = \"diskspd.exe -b1M -d60 -o64 -t4 -r $PerfSMBFileSize $NumFiles $PerfSMB\\IO.dat > $global:LogFolder\\$($LogPrefix)_PerfSMB_writeremote.txt\""
+    "invocation_evidence": "TSS.ps1:30550: $PerfSMBFileSize = \"-c\" + \"$script:PerfSMBSize$PerfSMBUnit\" # Fix for DiskSpd command"
   },
   {
     "path": "BIN/fruti_1903.exe",
@@ -151,21 +151,21 @@
     "signed": true,
     "digest_match": true,
     "purpose": "Sysinternals Handle \u2014 lists open handles per process. Confirmed actively invoked: 'handle.exe -a /AcceptEula' in TSS_SHA.psm1:1295 and TSS.ps1:7262, and per-PID via '& $global:HandleExe $matches[1] /accepteula' at TSS.ps1:14366; collected by default unless the -noHandle switch is passed (TSS.ps1:1596). An earlier draft of this table incorrectly called this a false positive after the evidence-search tool's match cap surfaced only unrelated GUI comment hits first; corrected after independent critique (see .devils-advocate log).",
-    "invocation_evidence": "TSS.ps1:1596: [Switch]$noHandle,\t\t# do not collect Handle.exe"
+    "invocation_evidence": "TSS_SHA.psm1:1292: $LogFolder = \"$global:LogFolder\\support$global:LogSuffix\\handle\""
   },
   {
     "path": "BIN/kd.exe",
     "signed": true,
     "digest_match": true,
     "purpose": "Likely the Microsoft Kernel Debugger (kd.exe, from Debugging Tools for Windows) by name and bundling alongside cdb.exe/livekd.exe, but the automated script match was a false positive (matched inside an unrelated base64-encoded certificate blob) \u2014 no confirmed direct invocation found.",
-    "invocation_evidence": "TSS.ps1:6048: \"nltest /dsgetdc: /kdc /force \t\t\t| Out-File -Append $outFile\""
+    "invocation_evidence": "TSS_UEX.psm1:3838: Get-hnsnetwork | ForEach-Object { Get-HnsNetwork -Id $_.ID -Detailed } | Convertto-json -Depth 20 | Out-File $global:LogFolder\\networkdetailed.txt"
   },
   {
     "path": "BIN/livekd.exe",
     "signed": true,
     "digest_match": true,
     "purpose": "Sysinternals LiveKD \u2014 allows running the kernel debugger against a live system; gated behind an explicit -LiveKD parameter/switch in TSS.ps1.",
-    "invocation_evidence": "TSS.ps1:1388: [String]$LiveKD,"
+    "invocation_evidence": "TSS.ps1:21221: if ($global:ParameterArray -contains 'LiveKD' -and ([math]::Ceiling((Get-CimInstance Win32_ComputerSystem).TotalPhysicalMemory / 1GB) -ge 256)) {"
   },
   {
     "path": "BIN/npivtool.exe",
@@ -179,7 +179,7 @@
     "signed": true,
     "digest_match": true,
     "purpose": "Referenced by name in a Hyper-V networking diagnostic script, but that script actually invokes companion .js files (nvspinfo.js/nvspinfov2.js) via cscript rather than this .exe directly \u2014 its exact role alongside those scripts was not confirmed.",
-    "invocation_evidence": "psSDP/Diag/global/DC_HyperVNetInfo.ps1:18: $CommandToExecute = \"cmd.exe /c cscript.exe //nologo nvspinfo.js /z > $OutputFile\""
+    "invocation_evidence": "TSS_UEX.psm1:3885: nvspinfo -a -i -h -D -p -d -m -q | Out-File $global:LogFolder\\Host_nvspinfo.txt"
   },
   {
     "path": "BIN/perfctrl.dll",
@@ -200,7 +200,7 @@
     "signed": true,
     "digest_match": true,
     "purpose": "Sysinternals ProcDump \u2014 captures process memory dumps on demand or on a trigger (e.g. crash, hang, CPU threshold); gated behind -ProcDump and -ProcDumpAppCrash parameters.",
-    "invocation_evidence": "TSS.ps1:7757: $global:ProcDump = \"Procdump.exe\""
+    "invocation_evidence": "TSS_NET.psm1:2089: $NET_RAS_ETWTracingSwitchesStatus['ProcDump RaMgmtui.exe,Rasman,RemoteAccess,RaMgmtSvc,IKEEXT,BFE'] = $true"
   },
   {
     "path": "BIN/psping.exe",
@@ -235,14 +235,14 @@
     "signed": true,
     "digest_match": true,
     "purpose": "Windows Performance Recorder \u2014 ETW-based system tracing tool; orchestrated via TSS's WPR profile listing/selection logic (-ListSupportedWPRScenario, WPRprofiles parameter type) and the -WPR trace-start pathway noted earlier in this review.",
-    "invocation_evidence": "TSSGUI.ps1:429: if ($parameterType -eq \"WPRprofiles\") { $parameterType = \"WPR\" }"
+    "invocation_evidence": "TSS_UEX.psm1:3564: $startContainerTracecmd = \"hcsdiag.exe exec -user 'NT AUTHORITY\\SYSTEM' $containerId wpr.exe -start c:\\programdata\\Microsoft\\Windows\\ContainerProviders_customiz"
   },
   {
     "path": "BIN/xperf.exe",
     "signed": true,
     "digest_match": true,
     "purpose": "Windows Performance Toolkit's xperf \u2014 ETW-based system tracing and analysis tool; orchestrated via a parallel Xperf profile listing/selection logic (-ListSupportedXperfProfile) alongside wpr.exe.",
-    "invocation_evidence": "TSSGUI.ps1:430: if ($parameterType -eq \"XperfProfiles\") { $parameterType = \"Xperf\" }"
+    "invocation_evidence": "TSS.ps1:12760: If($global:ParameterArray -contains 'Xperf'){"
   },
   {
     "path": "BINARM/NTttcp.exe",
@@ -256,14 +256,14 @@
     "signed": true,
     "digest_match": true,
     "purpose": "ARM64 build of Sysinternals ProcDump (see BIN/procdump.exe).",
-    "invocation_evidence": "TSS.ps1:7757: $global:ProcDump = \"Procdump.exe\""
+    "invocation_evidence": "TSS_NET.psm1:2089: $NET_RAS_ETWTracingSwitchesStatus['ProcDump RaMgmtui.exe,Rasman,RemoteAccess,RaMgmtSvc,IKEEXT,BFE'] = $true"
   },
   {
     "path": "BINARM/Procmon.exe",
     "signed": true,
     "digest_match": true,
     "purpose": "ARM64 build of Sysinternals Process Monitor (see BIN/Procmon.exe).",
-    "invocation_evidence": "TSSGUI.ps1:1935: if ($line -match '^ProcMon|^WPR|^PSR|^Netsh|^Video|^Perf|^Xperf|^CommonTask|^RASdiag|^WFPdiag|^PktMon') {  # Check if line starts with \"ProcMon\""
+    "invocation_evidence": "TSS_NET.psm1:1658: \"NET_Proxy\"      = \"PSR,SDP,Video,ProcMon, AfdTcpFull,NCSI,NDIS,WebIO,WinInet,WinHTTP,Winsock ETL log(s), Proxy settings and related Registry settings, Netsh sc"
   },
   {
     "path": "BINARM/Sysmon64a.exe",
@@ -298,14 +298,14 @@
     "signed": true,
     "digest_match": true,
     "purpose": "Sysinternals PsGetSid \u2014 resolves/converts Windows SIDs; invoked with /AcceptEula while collecting SSHD service diagnostic info in the NET module.",
-    "invocation_evidence": "TSS_NET.psm1:3933: \"PsGetSID.exe $_ /AcceptEula | Out-File -Append $PrefixCn`sshd_PsGetSID_$global:TssPhase.txt\""
+    "invocation_evidence": "TSS_NET.psm1:3930: LogInfoFile \"... collecting sshd_Service info and running PsGetSID $_ at $global:TssPhase\""
   },
   {
     "path": "BINx64/Pstat.exe",
     "signed": true,
     "digest_match": true,
     "purpose": "WDK process/thread status utility; path constructed at TSS.ps1:32216 and invoked via Run-DiagExpression .\\DC_PStat.ps1 in the psSDP VSS and SUVP diagnostic command sets.",
-    "invocation_evidence": "TSS.ps1:32216: $global:PstatExe\t\t= $global:ScriptFolder + $BinArch + \"\\Pstat.exe\""
+    "invocation_evidence": "TSS_SDP.psm1:1914: & $global:PstatExe | Out-File \"$global:SDPFolder\\$($global:LogPrefix)PStat.txt\""
   },
   {
     "path": "BINx64/RecorderCommandLine.exe",
@@ -333,7 +333,7 @@
     "signed": true,
     "digest_match": true,
     "purpose": "Offline Files (CSC) client-side cache database dump tool; invoked to dump the CSC database as part of client-component diagnostics on client SKUs.",
-    "invocation_evidence": "psSDP/Diag/global/DC_CscClient-Component.ps1:179: $CommandToExecute = \"cmd.exe /c CscDbDump.exe dump > $OutputFile\""
+    "invocation_evidence": "TSS_SDP.psm1:5344: \"$global:ScriptFolder\\BINx64\\cscdbdump.exe dump | Out-File -Append $outFile\""
   },
   {
     "path": "BINx64/ctsTraffic.exe",
@@ -347,7 +347,7 @@
     "signed": true,
     "digest_match": true,
     "purpose": "Distributed File System (DFS) utility; invoked with /PKTflush to flush the DFS referral cache as part of DFS diagnostics.",
-    "invocation_evidence": "TSS.ps1:5360: LogInfoFile \"[$($MyInvocation.MyCommand.Name)] running 'DFSutil.exe /PKTflush' at $TssPhase\""
+    "invocation_evidence": "TSS_SDP.psm1:5354: \"DFS Client DFSUtil Output\"\t\t\t\t\t\t\t\t\t\t| Out-File -Append $OutFile"
   },
   {
     "path": "BINx64/dpmcmd.exe",
@@ -360,8 +360,8 @@
     "path": "BINx64/du.exe",
     "signed": true,
     "digest_match": true,
-    "purpose": "Likely Sysinternals Du (disk usage) by name and Sysinternals-suite bundling convention, but the automated script matches were false positives (matched unrelated changelog/URL text containing the substring 'du') \u2014 no confirmed direct invocation found.",
-    "invocation_evidence": "TSSGUI.ps1:57: \"Introduction to TroubleShootingScript toolset (TSS)\" = \"https://aka.ms/TssInfo\""
+    "purpose": "Sysinternals Du (disk usage). Confirmed actively invoked: path constructed at TSS.ps1:32213 ('$global:DuExe = ... \\Du.exe') and referenced by that variable in the storage (SHA) module. An earlier draft of this table incorrectly called this a false positive because the evidence-search tool's candidate cap (fixed after independent critique #4, see .devils-advocate log) never reached this line among 'du''s many incidental substring matches elsewhere in the scripts.",
+    "invocation_evidence": "TSS.ps1:32213: $global:DuExe\t\t\t= $global:ScriptFolder + $BinArch + \"\\Du.exe\""
   },
   {
     "path": "BINx64/evparse.exe",
@@ -375,7 +375,7 @@
     "signed": true,
     "digest_match": true,
     "purpose": "Fibre Channel Information utility (from the WDK) \u2014 invoked via a companion DC_FCInfo.ps1 script to collect Fibre Channel HBA/adapter information.",
-    "invocation_evidence": "psSDP/Diag/global/DC_FCInfo.ps1:5: 'Skipping running {fcinfo.exe} since it is not supported in ' + $OSArchitecture + ' architecture.' | WriteTo-StdOut"
+    "invocation_evidence": "TSS_SHA.psm1:2876: \"$ToolFolder\\fcinfo.exe /details | Out-File ${LogFolder}\\${Env:COMPUTERNAME}_fcinfo-details.txt\","
   },
   {
     "path": "BINx64/hbaapi.dll",
@@ -423,8 +423,8 @@
     "path": "BINx64/tmq.exe",
     "signed": true,
     "digest_match": true,
-    "purpose": "No confirmed direct script reference (the one substring match found was inside an unrelated base64-encoded certificate blob, a false positive); by naming convention alongside tmqsite/tmqstate/tmqstore/tmqtry, likely part of an MSMQ (Microsoft Message Queuing) diagnostic/test toolset.",
-    "invocation_evidence": "scripts/Wmi-Collect.ps1:1466: # MASAAgH0oIHZpIHWMIHTMQswCQYDVQQGEwJVUzETMBEGA1UECBMKV2FzaGluZ3Rv"
+    "purpose": "MSMQ (Microsoft Message Queuing) diagnostic/test tool. Confirmed actively invoked: path constructed at TSS_INT.psm1:29 ('$global:TMQexePath = ... \\TMQ.exe'), Test-Path-gated, and run with 'state'/'site'/'store -v' subcommands (TSS_INT.psm1:232-242) as part of the INT (integration/messaging) module. An earlier draft of this table incorrectly called this a false positive after the evidence-search tool's candidate cap (fixed after independent critique #4) was exhausted by incidental 'tmq' substring matches inside base64-encoded certificate blobs before reaching the real invocation lines.",
+    "invocation_evidence": "TSS_INT.psm1:29: $global:TMQexePath = $global:ScriptFolder + $BinArch + \"\\TMQ.exe\""
   },
   {
     "path": "BINx64/tmqsite.dll",
@@ -501,14 +501,14 @@
     "signed": true,
     "digest_match": true,
     "purpose": "32-bit build of Sysinternals PsGetSid (see BINx64/PsGetsid.exe).",
-    "invocation_evidence": "TSS_NET.psm1:3933: \"PsGetSID.exe $_ /AcceptEula | Out-File -Append $PrefixCn`sshd_PsGetSID_$global:TssPhase.txt\""
+    "invocation_evidence": "TSS_NET.psm1:3930: LogInfoFile \"... collecting sshd_Service info and running PsGetSID $_ at $global:TssPhase\""
   },
   {
     "path": "BINx86/Pstat.exe",
     "signed": true,
     "digest_match": true,
     "purpose": "32-bit build of the WDK process/thread status utility (see BINx64/Pstat.exe); same Run-DiagExpression .\\DC_PStat.ps1 invocation path.",
-    "invocation_evidence": "TSS.ps1:32216: $global:PstatExe\t\t= $global:ScriptFolder + $BinArch + \"\\Pstat.exe\""
+    "invocation_evidence": "TSS_SDP.psm1:1914: & $global:PstatExe | Out-File \"$global:SDPFolder\\$($global:LogPrefix)PStat.txt\""
   },
   {
     "path": "BINx86/RecorderCommandLine.exe",
@@ -536,14 +536,14 @@
     "signed": true,
     "digest_match": true,
     "purpose": "32-bit build of the Offline Files cache database dump tool (see BINx64/cscdbdump.exe).",
-    "invocation_evidence": "psSDP/Diag/global/DC_CscClient-Component.ps1:179: $CommandToExecute = \"cmd.exe /c CscDbDump.exe dump > $OutputFile\""
+    "invocation_evidence": "TSS_SDP.psm1:5344: \"$global:ScriptFolder\\BINx64\\cscdbdump.exe dump | Out-File -Append $outFile\""
   },
   {
     "path": "BINx86/dfsutil.exe",
     "signed": true,
     "digest_match": true,
     "purpose": "32-bit build of the DFS utility (see BINx64/dfsutil.exe).",
-    "invocation_evidence": "TSS.ps1:5360: LogInfoFile \"[$($MyInvocation.MyCommand.Name)] running 'DFSutil.exe /PKTflush' at $TssPhase\""
+    "invocation_evidence": "TSS_SDP.psm1:5354: \"DFS Client DFSUtil Output\"\t\t\t\t\t\t\t\t\t\t| Out-File -Append $OutFile"
   },
   {
     "path": "BINx86/dpmcmd.exe",
@@ -556,8 +556,8 @@
     "path": "BINx86/du.exe",
     "signed": true,
     "digest_match": true,
-    "purpose": "32-bit build corresponding to BINx64/du.exe; same caveat applies \u2014 no confirmed direct invocation found (automated matches were false positives).",
-    "invocation_evidence": "TSSGUI.ps1:57: \"Introduction to TroubleShootingScript toolset (TSS)\" = \"https://aka.ms/TssInfo\""
+    "purpose": "32-bit build of Sysinternals Du (see BINx64/du.exe) \u2014 same confirmed invocation path ('$global:DuExe', TSS.ps1:32213).",
+    "invocation_evidence": "TSS.ps1:32213: $global:DuExe\t\t\t= $global:ScriptFolder + $BinArch + \"\\Du.exe\""
   },
   {
     "path": "BINx86/evparse.exe",
@@ -571,7 +571,7 @@
     "signed": true,
     "digest_match": true,
     "purpose": "32-bit build of the Fibre Channel Information utility (see BINx64/fcinfo.exe).",
-    "invocation_evidence": "psSDP/Diag/global/DC_FCInfo.ps1:5: 'Skipping running {fcinfo.exe} since it is not supported in ' + $OSArchitecture + ' architecture.' | WriteTo-StdOut"
+    "invocation_evidence": "TSS_SHA.psm1:2876: \"$ToolFolder\\fcinfo.exe /details | Out-File ${LogFolder}\\${Env:COMPUTERNAME}_fcinfo-details.txt\","
   },
   {
     "path": "BINx86/hbaapi.dll",
@@ -648,14 +648,14 @@
     "signed": true,
     "digest_match": true,
     "purpose": "Storage Area Network diagnostic tool \u2014 purpose corroborated by DC_SanStorageInfo.ps1:16 ('cmd.exe /c SAN.exe $CommandToAdd'), but that reference sits inside a PowerShell block comment (<# ... #>) under a '#region Old Code' marker, i.e. legacy/dead code, not part of the currently active execution path. An earlier draft of this table incorrectly attributed the absence of top-ranked evidence to a false-positive match on an unrelated GUI/Copilot function name; corrected after independent critique (see .devils-advocate log) \u2014 the real explanation is that the evidence-search tool deprioritizes commented-out lines, and this binary's only textual reference happens to be commented out.",
-    "invocation_evidence": "DC_SanStorageInfo.ps1:16: $CommandToExecute = \"cmd.exe /c SAN.exe $CommandToAdd\" [inside a commented-out <# ... #> block under '#region Old Code' \u2014 legacy/dead code, not the active execution path; automated scorer could not surface this line because \"SAN\" is too common a substring across the 695 scripts for the 40-candidate cap to reach it \u2014 manually verified instead]"
+    "invocation_evidence": "DC_SanStorageInfo.ps1:16: $CommandToExecute = \"cmd.exe /c SAN.exe $CommandToAdd\" [inside a commented-out <# ... #> block under '#region Old Code' \u2014 legacy/dead code, not the active execution path; the automated scorer ranks this line no higher than unrelated same-word collisions elsewhere (the DiskPart \"san\" command, the X.509 \"SAN\" field) \u2014 manually verified and selected instead]"
   },
   {
     "path": "psSDP/Diag/global/Showpriv.exe",
     "signed": true,
     "digest_match": true,
     "purpose": "Duplicate copy of the privilege-enumeration tool bundled specifically for the psSDP diagnostic framework (see BIN/Showpriv.exe); invoked identically via the user-rights diagnostic script.",
-    "invocation_evidence": "psSDP/Diag/global/DC_UserRights.ps1:19: 'Skipping running {showpriv.exe} since it is not supported in ' + $OSArchitecture + ' architecture.' | WriteTo-StdOut"
+    "invocation_evidence": "TSS_SDP.psm1:2398: \"$global:ScriptFolder\\BIN\\showpriv.exe SeTakeOwnershipPrivilege | Out-File -Append $outFile\""
   },
   {
     "path": "psSDP/Diag/global/WSRUNAMD64.EXE",
@@ -682,8 +682,8 @@
     "path": "psSDP/Diag/global/cdb.exe",
     "signed": true,
     "digest_match": true,
-    "purpose": "Microsoft Console Debugger (cdb.exe, from Debugging Tools for Windows) \u2014 referenced in obfuscated/encoded blocks of TSSGUI.ps1 and xray.ps1 that could not be reliably attributed to a specific invocation in this review; bundled as a standard user-mode debugger for the diagnostic framework.",
-    "invocation_evidence": "scripts/DSC-Collect.ps1:173: $cmd = \"cmd.exe /c esentutl.exe /y \"\"\" + $DSCDb +  \"\"\" /vssrec\""
+    "purpose": "Microsoft Console Debugger (cdb.exe, from Debugging Tools for Windows) \u2014 confirmed actively referenced at TS_DumpCollector.ps1:54 ('/cdbpath:$Global:ToolsPath\\cdb.exe /debuginfo'), passed as a debug-info-collection argument for dump analysis; an earlier draft of this table understated this as an unattributed/obfuscated reference before the evidence-search tool's candidate cap was fixed (independent critique #4).",
+    "invocation_evidence": "TS_DumpCollector.ps1:54: $ScriptArguments += \"/cdbpath:$Global:ToolsPath\\cdb.exe /debuginfo\" [active code, passed as a debug-info-collection argument; the automated scorer ties this line with the commented-out remnant immediately above it (line 53) and the stable sort displays the comment fragment first \u2014 manually selected the active line instead]"
   },
   {
     "path": "psSDP/Diag/global/certadm.dll",
@@ -718,7 +718,7 @@
     "signed": true,
     "digest_match": true,
     "purpose": "Duplicate copy of the Device Console tool bundled for the psSDP diagnostic framework (see BIN/devcon.exe); invoked by the same device/connection diagnostic script.",
-    "invocation_evidence": "psSDP/Diag/global/DC_Devcon.ps1:34: 'Skipping running {devcon.exe} since it is not supported in ' + $OSArchitecture + ' architecture.' | WriteTo-StdOut"
+    "invocation_evidence": "TSS_SDP.psm1:4507: $OutFile = \"$global:SDPFolder\\$($global:LogPrefix)Devcon.TXT\""
   },
   {
     "path": "psSDP/Diag/global/dosdev.exe",
