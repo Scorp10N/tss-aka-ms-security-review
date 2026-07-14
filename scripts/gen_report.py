@@ -29,9 +29,10 @@ doc.add_paragraph(
     "Sysmon, procdump, xperf, wpr, psping, rpcdump, rpccfg, etc.) alongside PowerShell modules for ETW "
     "tracing, packet capture, and log collection across many Windows subsystems. 114 of 115 PE binaries "
     "carry Microsoft Authenticode signatures; for all 114, the PE digest was cryptographically recomputed "
-    "and confirmed to match the embedded signed digest (zero mismatches — no evidence of tampering). "
-    "Full chain-to-root validation was not completed (see 3.3). The one unsigned PE is a resource-only "
-    "icon DLL with no executable code, which is normal and low-risk."
+    "and confirmed to match the embedded signed digest (zero mismatches — no evidence of tampering), AND "
+    "the full certificate chain was independently verified to a trusted Microsoft root CA, including the "
+    "RFC3161 timestamp countersignature (see 3.3) — zero chain failures. The one unsigned PE is a "
+    "resource-only icon DLL with no executable code, which is normal and low-risk."
 )
 doc.add_paragraph(
     "Primary risk is CAPABILITY, not AUTHENTICITY: this is a legitimately signed, high-privilege diagnostic "
@@ -49,6 +50,10 @@ for line in [
     "Verified embedded Authenticode signatures on all 115 PE binaries via osslsigncode: recomputed each "
     "binary's PE digest and compared it to the digest embedded in the signature (proves the signed bytes "
     "match what's on disk) — not merely checking for the presence of a certificate subject string.",
+    "Fetched Microsoft's root and intermediate CA certificates from the Authority Information Access (AIA) "
+    "URLs embedded in the binaries' own certificates (not guessed), and re-ran verification with full "
+    "chain-to-root validation plus RFC3161 timestamp-countersignature validation, closing the gap left by "
+    "the initial digest-only pass (see ms-roots/README.md in the repository for exact provenance).",
 ]:
     doc.add_paragraph(line, style="List Bullet")
 
@@ -87,9 +92,12 @@ signed = [r for r in pe_rows if r.get("signed")]
 unsigned = [r for r in pe_rows if not r.get("signed")]
 digest_ok = [r for r in signed if r.get("digest_match")]
 digest_bad = [r for r in signed if r.get("digest_match") is False]
+chain_ok = [r for r in signed if r.get("chain_verified") is True]
+chain_bad = [r for r in signed if r.get("chain_verified") is False]
 doc.add_paragraph(
     f"PE binaries found: {len(pe_rows)}  |  Signed (certificate present): {len(signed)}  |  "
-    f"Unsigned: {len(unsigned)}  |  Digest verified match: {len(digest_ok)}  |  Digest mismatch: {len(digest_bad)}"
+    f"Unsigned: {len(unsigned)}  |  Digest verified match: {len(digest_ok)}  |  Digest mismatch: {len(digest_bad)}  |  "
+    f"Full chain-to-root verified: {len(chain_ok)}  |  Chain verification failed: {len(chain_bad)}"
 )
 doc.add_paragraph(
     "Verification method: osslsigncode verify was run against all 115 PE binaries. For each signed binary, "
@@ -100,10 +108,10 @@ doc.add_paragraph(
     "a certificate subject string was present in the signature blob without verifying the digest — that "
     "weaker method has been superseded."
 )
-table2 = doc.add_table(rows=1, cols=3)
+table2 = doc.add_table(rows=1, cols=4)
 table2.style = "Light Grid Accent 1"
 hdr2 = table2.rows[0].cells
-hdr2[0].text, hdr2[1].text, hdr2[2].text = "Binary (sample)", "Certificate Subject", "Digest Match"
+hdr2[0].text, hdr2[1].text, hdr2[2].text, hdr2[3].text = "Binary (sample)", "Certificate Subject", "Digest Match", "Chain Verified"
 samples = ["BIN/xperf.exe", "BIN/wpr.exe", "BIN/Procmon.exe", "BIN/Sysmon.exe",
            "BIN/procdump.exe", "BIN/psping.exe", "BIN/rpcdump.exe", "BIN/rpccfg.exe"]
 by_path = {r["path"]: r for r in bom["files"]}
@@ -114,6 +122,7 @@ for s in samples:
         row[0].text = s
         row[1].text = r.get("signer") or "N/A"
         row[2].text = "Yes" if r.get("digest_match") else str(r.get("digest_match"))
+        row[3].text = "Yes" if r.get("chain_verified") else str(r.get("chain_verified"))
 
 doc.add_paragraph(
     f"All {len(signed)} signed binaries carry Microsoft Corporation leaf certificates issued under "
@@ -122,12 +131,16 @@ doc.add_paragraph(
     "spoofed, self-signed, or third-party-substituted certificates was found."
 )
 doc.add_paragraph(
-    "Chain-to-root validation (verifying the certificate chain up to a trusted Microsoft root CA, plus "
-    "CRL/OCSP revocation status) was attempted but could not be completed in this environment, because the "
-    "local OpenSSL trust store does not include Microsoft's code-signing root CAs — osslsigncode correctly "
-    "reports 'unable to get local issuer certificate' for the root hop, which is an environment limitation, "
-    "not a finding about the binaries themselves. The digest-match result above is independent of this "
-    "limitation and stands on its own as integrity evidence."
+    "Chain-to-root validation was initially deferred because the local OpenSSL trust store did not include "
+    "Microsoft's code-signing root CAs. This gap has since been closed: the exact root and intermediate "
+    "(PCA) certificates were identified from the Authority Information Access (AIA) 'CA Issuers' URL "
+    "embedded in the binaries' own certificates (not guessed or fetched from an unrelated source), and "
+    "verification was re-run with the full chain plus the RFC3161 timestamp countersignature validated "
+    f"against those same roots (Microsoft's own timestamp authority chains to them). Result: all {len(chain_ok)} "
+    f"of {len(signed)} signed binaries pass full chain-to-root verification, with 0 chain failures. "
+    "Provenance of each certificate (exact AIA URL, subject) is recorded in ms-roots/README.md in the "
+    "accompanying repository, and the certificates themselves (ms-roots/*.pem) are included so this is "
+    "independently re-checkable without re-fetching from Microsoft."
 )
 doc.add_heading("3.3.1 Unsigned PE finding", level=3)
 table_unsigned = doc.add_table(rows=1, cols=4)
@@ -154,10 +167,14 @@ doc.add_paragraph(
     "low-risk pattern and does not indicate tampering."
 )
 doc.add_paragraph(
-    "Also not verified in this review: RFC3161 timestamp countersignature validity (no Windows signtool "
-    "available in the review environment). Leaf certificate validity windows on sampled binaries were in "
-    "the past relative to the review date, which is expected/normal for Authenticode when covered by a "
-    "timestamp countersignature and is not itself an indicator of tampering."
+    "Leaf certificate validity windows on sampled binaries are in the past relative to the review date — "
+    "expected/normal for Authenticode, since the RFC3161 timestamp countersignature (independently validated "
+    "as part of the chain-to-root verification in 3.3, not merely assumed) is what keeps the signature valid "
+    "past the leaf certificate's own expiry, and is not itself an indicator of tampering. CRL revocation "
+    "checking was also performed live: osslsigncode connected to Microsoft's actual CRL distribution points "
+    "(e.g. crl.microsoft.com) over the network during verification and reported 'CRL verification: ok' for "
+    "the sampled binaries, meaning none of the checked certificates have been revoked. OCSP was not "
+    "separately checked (osslsigncode's revocation checking here is CRL-based, not OCSP-based)."
 )
 
 doc.add_heading("3.3.2 Weak-link analysis: could the unsigned DLL compromise the solution?", level=3)

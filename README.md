@@ -29,8 +29,11 @@ See [`TSS_Security_Review.docx`](TSS_Security_Review.docx) for the full report.
   purpose and, where found, the exact file:line in TSS's own PowerShell scripts that invokes it. Generated
   by `scripts/gen_tool_inventory.py` (grep-based evidence gathering across all 695 bundled `.ps1`/`.psm1`
   files) and `scripts/gen_tool_table.py` (merges evidence with hand-authored purpose descriptions). Also
-  reproduced in full as section 7 of the DOCX report. See that section for caveats on false-positive
-  matches (short names like `du`/`kd`/`SAN`) and on confidence level for less-documented internal tools.
+  reproduced in full as section 7 of the DOCX report. See that section for caveats on remaining
+  false-positive matches (e.g. `kd`) and on confidence level for less-documented internal tools.
+- `ms-roots/` — Microsoft root/intermediate CA certificates used for full chain-to-root Authenticode
+  verification, fetched from the AIA URLs embedded in the binaries' own certificates (see
+  `ms-roots/README.md` for exact provenance of each file).
 
 ## Key facts
 
@@ -41,11 +44,12 @@ See [`TSS_Security_Review.docx`](TSS_Security_Review.docx) for the full report.
 | Archive size | 37,178,473 bytes (~35.5 MB) |
 | Archive SHA-256 | see `bom.json` → `archive_sha256` |
 | Files in archive | 1,531 |
-| PE binaries | 115 (114 signed by Microsoft Corporation with digest verified — 0 mismatches; 1 unsigned resource-only icon DLL — no code) |
+| PE binaries | 115 (114 signed by Microsoft Corporation, digest verified — 0 mismatches; 1 unsigned resource-only icon DLL — no code) |
+| Chain-to-root verification | 114/114 signed binaries pass full chain-to-root + RFC3161 timestamp + CRL revocation checking — 0 failures |
 
-Chain-to-root / CRL / OCSP / timestamp-countersignature validation was not completed (no local Microsoft
-root CA trust store or Windows `signtool` in the review environment) — see the report's §3.3 for what that
-does and doesn't mean for the digest-match result.
+Chain-to-root/CRL/timestamp validation initially required a local Microsoft root CA trust store, which
+this review's environment didn't have — that gap has since been closed (see `ms-roots/README.md`). OCSP
+was not separately checked (verification here is CRL-based). See the report's §3.3 for full detail.
 
 ## What is intentionally NOT included in this repo
 

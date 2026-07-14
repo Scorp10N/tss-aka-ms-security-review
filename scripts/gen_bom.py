@@ -4,6 +4,12 @@ ROOT = "extracted"
 OUT_JSON = "bom.json"
 OUT_CSV = "bom.csv"
 
+# Microsoft root/intermediate CA certs for full chain-to-root verification, fetched
+# from the Authority Information Access (AIA) URLs embedded in the binaries' own
+# certificates (not guessed) — see ms-roots/README.md for provenance of each file.
+CA_FILE = "ms-roots/ms_roots_ca.pem"
+UNTRUSTED_FILE = "ms-roots/ms_intermediates.pem"
+
 def sha256(path):
     h = hashlib.sha256()
     with open(path, "rb") as f:
@@ -26,7 +32,11 @@ def osslsigncode_info(path):
         "signer": None,
         "issuer": None,
     }
-    result = subprocess.run(["osslsigncode", "verify", path], capture_output=True, text=True)
+    cmd = ["osslsigncode", "verify"]
+    if os.path.exists(CA_FILE) and os.path.exists(UNTRUSTED_FILE):
+        cmd += ["-CAfile", CA_FILE, "-untrusted", UNTRUSTED_FILE, "-TSA-CAfile", CA_FILE]
+    cmd.append(path)
+    result = subprocess.run(cmd, capture_output=True, text=True)
     out = result.stdout
     if "No signature found" in out or ("Subject:" not in out and "PE checksum" not in out):
         if "PE checksum" not in out and "Subject:" not in out and result.returncode not in (0, 1):
