@@ -69,7 +69,12 @@ def find_refs(basename_noext, max_refs=3):
             if sub_pat.search(line):
                 wb = bool(wb_pat.search(line))
                 candidates.append((score(line, wb), rel, i, line.strip()[:160]))
-    candidates.sort(key=lambda c: -c[0])
+    # Secondary sort key (rel path, then line number) makes tie-breaking deterministic
+    # regardless of os.walk()/dict traversal order, which Python does not guarantee
+    # stable across filesystems or runs. Check #5's critique proved that without this,
+    # 62 of 115 binaries' displayed evidence line could change under a different
+    # (equally valid) traversal order, even though the underlying data was correct.
+    candidates.sort(key=lambda c: (-c[0], c[1], c[2]))
     top = candidates[:max_refs]
     return [f"{rel}:{i}: {text}" for _, rel, i, text in top]
 

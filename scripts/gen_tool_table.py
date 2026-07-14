@@ -25,6 +25,13 @@ MANUAL_EVIDENCE_OVERRIDES = {
         "line with the commented-out remnant immediately above it (line 53) and the stable sort "
         "displays the comment fragment first — manually selected the active line instead]"
     ),
+    "BIN/handle.exe": (
+        "TSS_SHA.psm1:1295: \"$global:ScriptFolder\\BIN\\handle.exe -a /AcceptEula | Out-File "
+        "${LogFolder}\\${Env:COMPUTERNAME}_handle.txt\" "
+        "[the actual invocation; ties in score with TSS_SHA.psm1:1292 ($LogFolder=...\\handle, a "
+        "log-folder path string that happens to also match \"handle\" but isn't an invocation) — "
+        "manually selected the real invocation line instead]"
+    ),
 }
 
 inv = json.load(open("tool_inventory.json"))
