@@ -344,5 +344,24 @@ for r in tool_rows:
     row[2].text = r["purpose"]
     row[3].text = r["invocation_evidence"]
 
+doc.add_heading("8. Official References", level=1)
+doc.add_paragraph(
+    "Sources for further reading and authoritative usage guidance on TSS, limited to official/first-party "
+    "Microsoft sources — no third-party or community mirrors:"
+)
+for line in [
+    "TSS's own built-in help — the most authoritative and complete source: run \".\\TSS.ps1 -Help\" or "
+    "\"Get-Help .\\TSS.ps1 -full\" after extracting the archive, or \".\\TSS.ps1 -Search <keyword>\" for "
+    "topic-specific guidance. This is what was used during this review to understand TSS's own scenarios "
+    "and switches.",
+    "TSSGUI.ps1 — the bundled GUI front-end, for browsing available scenarios/switches interactively.",
+    "https://aka.ms/TssInfo — Microsoft's own \"Introduction to TroubleShootingScript toolset\" landing "
+    "page, referenced directly in TSSGUI.ps1's own help-link table.",
+    "The help/ directory inside the extracted archive.",
+    "https://aka.ms/gettss — the official Microsoft distribution short link for the toolkit itself "
+    "(analyzed in section 3.1 of this report).",
+]:
+    doc.add_paragraph(line, style="List Bullet")
+
 doc.save("TSS_Security_Review.docx")
 print("saved TSS_Security_Review.docx")

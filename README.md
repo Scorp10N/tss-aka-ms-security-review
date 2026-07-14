@@ -51,6 +51,19 @@ Chain-to-root/CRL/timestamp validation initially required a local Microsoft root
 this review's environment didn't have — that gap has since been closed (see `ms-roots/README.md`). OCSP
 was not separately checked (verification here is CRL-based). See the report's §3.3 for full detail.
 
+## Official references
+
+For further reading and authoritative usage guidance on TSS itself — official/first-party Microsoft
+sources only, no community mirrors:
+
+- TSS's own built-in help: `.\TSS.ps1 -Help` / `Get-Help .\TSS.ps1 -full`, or `.\TSS.ps1 -Search <keyword>`
+  for topic-specific guidance, after extracting the archive. This is what was used during this review.
+- `TSSGUI.ps1` — the bundled GUI front-end, for browsing available scenarios/switches interactively.
+- https://aka.ms/TssInfo — Microsoft's own "Introduction to TroubleShootingScript toolset" landing page,
+  referenced directly in `TSSGUI.ps1`'s own help-link table.
+- The `help/` directory inside the extracted archive.
+- https://aka.ms/gettss — the official Microsoft distribution short link for the toolkit itself.
+
 ## What is intentionally NOT included in this repo
 
 The actual `TSS.zip` archive and its extracted binaries are **not republished here** — they are Microsoft's
